@@ -10,7 +10,7 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;padding:2rem 1rem}
 .container{max-width:860px;margin:0 auto}
 h1{font-size:22px;font-weight:600;margin-bottom:4px}
-.subtitle{font-size:13px;color:#6b6b67;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px}
+.subtitle{font-size:13px;color:#6b6b67;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .sync-status{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500}
 .sync-ok{background:#E1F5EE;color:#085041}
 .sync-saving{background:#FAEEDA;color:#633806}
@@ -65,18 +65,32 @@ h1{font-size:22px;font-weight:600;margin-bottom:4px}
 .hours-input{width:54px;height:28px;font-size:12px;text-align:center;border:0.5px solid #ccc;border-radius:6px;background:#fff;color:#1a1a1a}
 .hours-input:focus{outline:none;border-color:#1D9E75}
 .hours-label{font-size:10px;color:#aaa;text-align:right;line-height:1.3}
-.cas-btn{display:inline-block;margin-top:6px;font-size:11px;font-weight:500;color:#085041;background:#E1F5EE;border:none;border-radius:6px;padding:5px 10px;cursor:pointer}
-.cas-btn:hover{background:#9FE1CB}
-.cas-panel{display:none;margin-top:10px;background:#fafaf8;border:0.5px solid #e0dfd8;border-radius:8px;padding:14px;font-size:12px;color:#333;line-height:1.7}
+.cas-btn{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:11px;font-weight:500;color:#633806;background:#FAEEDA;border:none;border-radius:6px;padding:6px 12px;cursor:pointer}
+.cas-btn:hover{background:#FAC775}
+.cas-panel{display:none;margin-top:10px;border:0.5px solid #e0dfd8;border-radius:8px;overflow:hidden}
 .cas-panel.open{display:block}
-.cas-panel h3{font-size:13px;font-weight:600;margin-bottom:8px;color:#1a1a1a}
-.cas-panel h4{font-size:12px;font-weight:600;margin:10px 0 4px;color:#1a1a1a}
-.cas-panel ul{padding-left:16px;margin:4px 0}
-.cas-panel li{margin-bottom:3px}
-.cas-panel .step{background:#E6F1FB;color:#0C447C;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;margin-right:6px}
-.cas-panel table{width:100%;border-collapse:collapse;margin:6px 0;font-size:11px}
-.cas-panel table th{background:#f0efe8;padding:4px 8px;text-align:left;font-weight:600}
-.cas-panel table td{padding:4px 8px;border-bottom:0.5px solid #e0dfd8}
+.cas-header{background:#FAEEDA;padding:12px 16px;font-size:12px;font-weight:600;color:#633806}
+.cas-body{background:#fafaf8;padding:16px;font-size:12px;color:#333;line-height:1.7}
+.cas-body h4{font-size:12px;font-weight:600;margin:14px 0 6px;color:#1a1a1a;padding-bottom:4px;border-bottom:0.5px solid #e0dfd8}
+.cas-body h4:first-child{margin-top:0}
+.cas-body ul{padding-left:18px;margin:4px 0}
+.cas-body li{margin-bottom:4px}
+.cas-body p{margin-bottom:6px}
+.cas-body table{width:100%;border-collapse:collapse;margin:8px 0;font-size:11px}
+.cas-body table th{background:#f0efe8;padding:5px 8px;text-align:left;font-weight:600;border:0.5px solid #e0dfd8}
+.cas-body table td{padding:5px 8px;border:0.5px solid #e0dfd8;vertical-align:top}
+.cas-body .pill{display:inline-block;font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;margin-right:4px}
+.pill-blue{background:#E6F1FB;color:#0C447C}
+.pill-green{background:#E1F5EE;color:#085041}
+.pill-amber{background:#FAEEDA;color:#633806}
+.pill-red{background:#FCEBEB;color:#791F1F}
+.pill-purple{background:#EEEDFE;color:#3C3489}
+.cas-body .signal-ok{color:#085041;font-weight:600}
+.cas-body .signal-warn{color:#633806;font-weight:600}
+.cas-body .signal-bad{color:#791F1F;font-weight:600}
+.cas-note{background:#E6F1FB;border-left:3px solid #185FA5;padding:8px 12px;margin:10px 0;font-size:11px;color:#0C447C;border-radius:0 6px 6px 0}
+.cas-warn{background:#FAEEDA;border-left:3px solid #BA7517;padding:8px 12px;margin:10px 0;font-size:11px;color:#633806;border-radius:0 6px 6px 0}
+.cas-danger{background:#FCEBEB;border-left:3px solid #A32D2D;padding:8px 12px;margin:10px 0;font-size:11px;color:#791F1F;border-radius:0 6px 6px 0}
 .footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:8px}
 .reset-btn{font-size:12px;color:#888;cursor:pointer;border:0.5px solid #ddd;border-radius:6px;padding:5px 12px;background:#fff}
 .reset-btn:hover{background:#f5f4f0}
@@ -106,90 +120,239 @@ h1{font-size:22px;font-weight:600;margin-bottom:4px}
     <span class="footer-tip">Progression synchronisée sur tous tes appareils</span>
   </div>
 </div>
-
+ 
 <script>
-const API_KEY = '$2a$10$5M9.tjyDJ2OTKuK11Cy5s.NNJVRhTsWTdX.49MXhTKCdCjBpaSZtO';
-const BIN_NAME = 'roadmap-yann';
-let BIN_ID = localStorage.getItem('jsonbin_id') || null;
-let saveTimer = null;
-let state = {};
-
-async function loadFromCloud() {
+const API_KEY='$2a$10$5M9.tjyDJ2OTKuK11Cy5s.NNJVRhTsWTdX.49MXhTKCdCjBpaSZtO';
+const BIN_NAME='roadmap-yann';
+let BIN_ID=localStorage.getItem('jsonbin_id')||null;
+let saveTimer=null;
+let state={};
+ 
+async function loadFromCloud(){
   setStatus('loading');
-  try {
-    if (!BIN_ID) {
-      const local = localStorage.getItem('roadmap_daf_v5');
-      if (local) state = JSON.parse(local);
+  try{
+    if(!BIN_ID){
+      const local=localStorage.getItem('roadmap_daf_v5');
+      if(local)state=JSON.parse(local);
       await createBin();
-    } else {
-      const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-        headers: { 'X-Master-Key': API_KEY }
-      });
-      const data = await res.json();
-      state = data.record || {};
+    }else{
+      const res=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`,{headers:{'X-Master-Key':API_KEY}});
+      const data=await res.json();
+      state=data.record||{};
     }
-    setStatus('ok');
-    render();
-    updateStats();
-  } catch(e) {
-    const local = localStorage.getItem('roadmap_daf_v5');
-    if (local) state = JSON.parse(local);
-    setStatus('error');
-    render();
-    updateStats();
+    setStatus('ok');render();updateStats();
+  }catch(e){
+    const local=localStorage.getItem('roadmap_daf_v5');
+    if(local)state=JSON.parse(local);
+    setStatus('error');render();updateStats();
   }
 }
-
-async function createBin() {
-  const res = await fetch('https://api.jsonbin.io/v3/b', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Master-Key': API_KEY,
-      'X-Bin-Name': BIN_NAME,
-      'X-Bin-Private': 'true'
-    },
-    body: JSON.stringify(state)
-  });
-  const data = await res.json();
-  BIN_ID = data.metadata.id;
-  localStorage.setItem('jsonbin_id', BIN_ID);
+async function createBin(){
+  const res=await fetch('https://api.jsonbin.io/v3/b',{method:'POST',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY,'X-Bin-Name':BIN_NAME,'X-Bin-Private':'true'},body:JSON.stringify(state)});
+  const data=await res.json();
+  BIN_ID=data.metadata.id;
+  localStorage.setItem('jsonbin_id',BIN_ID);
 }
-
-async function saveToCloud() {
+async function saveToCloud(){
   setStatus('saving');
-  try {
-    if (!BIN_ID) await createBin();
-    await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': API_KEY
-      },
-      body: JSON.stringify(state)
-    });
-    localStorage.setItem('roadmap_daf_v5', JSON.stringify(state));
+  try{
+    if(!BIN_ID)await createBin();
+    await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(state)});
+    localStorage.setItem('roadmap_daf_v5',JSON.stringify(state));
     setStatus('ok');
-  } catch(e) {
-    localStorage.setItem('roadmap_daf_v5', JSON.stringify(state));
-    setStatus('error');
-  }
+  }catch(e){localStorage.setItem('roadmap_daf_v5',JSON.stringify(state));setStatus('error');}
 }
-
-function scheduleSave() {
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(saveToCloud, 1000);
+function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveToCloud,1000);}
+function setStatus(s){
+  const el=document.getElementById('sync-status');if(!el)return;
+  if(s==='ok'){el.className='sync-status sync-ok';el.textContent='✓ Synchronisé';}
+  else if(s==='saving'||s==='loading'){el.className='sync-status sync-saving';el.textContent='⟳ '+(s==='saving'?'Sauvegarde...':'Chargement...');}
+  else{el.className='sync-status sync-error';el.textContent='⚠ Hors ligne (local)';}
 }
-
-function setStatus(s) {
-  const el = document.getElementById('sync-status');
-  if (!el) return;
-  if (s === 'ok') { el.className='sync-status sync-ok'; el.textContent='✓ Synchronisé'; }
-  else if (s === 'saving') { el.className='sync-status sync-saving'; el.textContent='⟳ Sauvegarde...'; }
-  else if (s === 'loading') { el.className='sync-status sync-saving'; el.textContent='⟳ Chargement...'; }
-  else { el.className='sync-status sync-error'; el.textContent='⚠ Hors ligne (local)'; }
-}
-
+ 
+const CAS = {
+ 
+cas1: `<div class="cas-header">Cas pratique — Phase 1 · Lecture des états financiers · Mécatech Industries</div>
+<div class="cas-body">
+<div class="cas-note">Niveau : très guidé · Pas d'Excel · Pas de calcul · 100% lecture et interprétation · Durée estimée : 2h</div>
+ 
+<h4>Contexte — Mécatech Industries</h4>
+<p>Mécatech Industries est une PME française qui fabrique des pièces métalliques pour l'industrie automobile. Elle emploie 180 personnes, réalise un chiffre d'affaires de 42 M€ et est implantée dans la région de Lyon. Son directeur général te consulte : il veut savoir si la santé financière de son entreprise lui permet d'embaucher 20 salariés supplémentaires l'année prochaine.</p>
+<p>Voici ses états financiers pour l'année N (en milliers d'euros) :</p>
+ 
+<h4>Compte de résultat (année N)</h4>
+<table>
+  <tr><th>Poste</th><th>Montant (k€)</th></tr>
+  <tr><td>Chiffre d'affaires</td><td>42 000</td></tr>
+  <tr><td>Achats et charges externes</td><td>– 24 500</td></tr>
+  <tr><td><strong>Marge brute</strong></td><td><strong>17 500</strong></td></tr>
+  <tr><td>Charges de personnel</td><td>– 11 200</td></tr>
+  <tr><td>Dotations aux amortissements</td><td>– 1 800</td></tr>
+  <tr><td>Autres charges d'exploitation</td><td>– 900</td></tr>
+  <tr><td><strong>Résultat d'exploitation (EBIT)</strong></td><td><strong>3 600</strong></td></tr>
+  <tr><td>Charges financières (intérêts)</td><td>– 480</td></tr>
+  <tr><td><strong>Résultat avant impôt</strong></td><td><strong>3 120</strong></td></tr>
+  <tr><td>Impôt sur les sociétés (25%)</td><td>– 780</td></tr>
+  <tr><td><strong>Résultat net</strong></td><td><strong>2 340</strong></td></tr>
+</table>
+ 
+<h4>Bilan simplifié (fin d'année N)</h4>
+<table>
+  <tr><th>ACTIF</th><th>Montant (k€)</th><th>PASSIF</th><th>Montant (k€)</th></tr>
+  <tr><td>Immobilisations nettes</td><td>9 200</td><td>Capitaux propres</td><td>11 400</td></tr>
+  <tr><td>Stocks</td><td>3 800</td><td>Dettes financières long terme</td><td>6 000</td></tr>
+  <tr><td>Créances clients</td><td>5 600</td><td>Dettes fournisseurs</td><td>4 200</td></tr>
+  <tr><td>Trésorerie</td><td>3 200</td><td>Autres dettes court terme</td><td>200</td></tr>
+  <tr><td><strong>Total actif</strong></td><td><strong>21 800</strong></td><td><strong>Total passif</strong></td><td><strong>21 800</strong></td></tr>
+</table>
+ 
+<h4>Questions — réponds à chacune par écrit avant de demander une correction à Claude</h4>
+<ul>
+  <li><span class="pill pill-blue">Q1</span> Quel est le chiffre d'affaires de Mécatech ? À quoi correspond-il concrètement dans leur activité ?</li>
+  <li><span class="pill pill-blue">Q2</span> La marge brute est de 17 500 k€. Qu'est-ce que ça représente en % du CA ? Est-ce que c'est bon pour une industrie manufacturière ?</li>
+  <li><span class="pill pill-blue">Q3</span> L'entreprise est-elle rentable ? Justifie avec les bons chiffres.</li>
+  <li><span class="pill pill-blue">Q4</span> Regarde la trésorerie et les dettes financières. Est-ce que Mécatech a les moyens de rembourser sa dette si elle le devait demain ?</li>
+  <li><span class="pill pill-blue">Q5</span> Les créances clients sont de 5 600 k€ et les dettes fournisseurs de 4 200 k€. Qu'est-ce que ça t'indique sur la gestion du cycle client/fournisseur ?</li>
+  <li><span class="pill pill-blue">Q6</span> Le directeur veut embaucher 20 personnes. Ça représente environ 1 100 k€ de charges supplémentaires par an. En regardant uniquement les états financiers, est-ce que tu lui conseilles de le faire ? Pourquoi ?</li>
+</ul>
+<div class="cas-warn">Une fois tes réponses rédigées, envoie-les à Claude avec le message : "Corrige mon cas pratique Phase 1 — Mécatech" et colle tes réponses.</div>
+</div>`,
+ 
+cas2: `<div class="cas-header">Cas pratique — Phase 2 · Diagnostic financier complet · Mécatech Industries (suite)</div>
+<div class="cas-body">
+<div class="cas-note">Niveau : semi-guidé · Excel requis · Tu trouves les formules toi-même · Durée estimée : 4h</div>
+ 
+<h4>Contexte — suite du cas Mécatech</h4>
+<p>Tu reprends les mêmes données financières de Mécatech Industries (Phase 1). Cette fois tu as accès aux données sur 2 ans pour voir l'évolution. Le directeur te demande maintenant un diagnostic financier structuré, pas juste une lecture.</p>
+ 
+<h4>Données comparatives N-1 / N</h4>
+<table>
+  <tr><th>Indicateur</th><th>Année N-1</th><th>Année N</th></tr>
+  <tr><td>Chiffre d'affaires (k€)</td><td>38 500</td><td>42 000</td></tr>
+  <tr><td>Marge brute (k€)</td><td>15 800</td><td>17 500</td></tr>
+  <tr><td>EBITDA (k€)</td><td>4 600</td><td>5 400</td></tr>
+  <tr><td>EBIT (k€)</td><td>2 900</td><td>3 600</td></tr>
+  <tr><td>Résultat net (k€)</td><td>1 850</td><td>2 340</td></tr>
+  <tr><td>Stocks (k€)</td><td>3 200</td><td>3 800</td></tr>
+  <tr><td>Créances clients (k€)</td><td>4 900</td><td>5 600</td></tr>
+  <tr><td>Dettes fournisseurs (k€)</td><td>3 600</td><td>4 200</td></tr>
+  <tr><td>Actif courant (k€)</td><td>11 200</td><td>12 600</td></tr>
+  <tr><td>Passif courant (k€)</td><td>3 900</td><td>4 400</td></tr>
+  <tr><td>Capitaux propres (k€)</td><td>9 800</td><td>11 400</td></tr>
+  <tr><td>Dette nette (k€)</td><td>3 200</td><td>2 800</td></tr>
+  <tr><td>Capital employé (k€)</td><td>13 000</td><td>14 200</td></tr>
+  <tr><td>Free Cash Flow (k€)</td><td>1 400</td><td>2 100</td></tr>
+</table>
+ 
+<h4>Étape 1 — Structure ton fichier Excel</h4>
+<p>Crée un fichier avec 2 onglets :</p>
+<ul>
+  <li><span class="pill pill-blue">Onglet 1</span> <strong>Données brutes</strong> — Recopie le tableau ci-dessus</li>
+  <li><span class="pill pill-blue">Onglet 2</span> <strong>Ratios</strong> — Calcule les 8 ratios ci-dessous pour N-1 et N, puis calcule l'évolution en %</li>
+</ul>
+ 
+<h4>Étape 2 — Les 8 ratios à calculer (formules à trouver toi-même)</h4>
+<table>
+  <tr><th>Ratio</th><th>Ce qu'il mesure</th><th>Résultat N-1</th><th>Résultat N</th><th>Évolution</th></tr>
+  <tr><td>Taux de marge brute</td><td>Efficacité commerciale</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
+  <tr><td>Taux de marge EBITDA</td><td>Rentabilité opérationnelle</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
+  <tr><td>Ratio de liquidité générale</td><td>Capacité à payer court terme</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
+  <tr><td>BFR en jours de CA</td><td>Poids du cycle d'exploitation</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
+  <tr><td>Levier financier (Dette nette / EBITDA)</td><td>Niveau d'endettement</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
+  <tr><td>ROE</td><td>Rentabilité des fonds propres</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
+  <tr><td>ROCE</td><td>Rentabilité du capital employé</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
+  <tr><td>Cash conversion (FCF / EBITDA)</td><td>Qualité des bénéfices</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
+</table>
+ 
+<h4>Étape 3 — Rédige un diagnostic d'une demi-page</h4>
+<ul>
+  <li>Structure : <strong>2 points forts · 2 points de vigilance · 1 conclusion</strong></li>
+  <li>Chaque point doit s'appuyer sur un ratio calculé — pas d'affirmation sans chiffre</li>
+  <li>Réponds à la question : est-ce que Mécatech peut embaucher ET investir dans une nouvelle machine à 800 k€ cette année ?</li>
+</ul>
+<div class="cas-warn">Envoie ton fichier Excel + ton diagnostic à Claude : "Corrige mon cas pratique Phase 2 — Mécatech"</div>
+</div>`,
+ 
+cas3: `<div class="cas-header">Cas pratique — Phase 3 · Valorisation & stratégie · Mécatech Industries (conclusion)</div>
+<div class="cas-body">
+<div class="cas-note">Niveau : peu guidé · Excel requis · Large autonomie sur les choix d'hypothèses · Durée estimée : 5h</div>
+ 
+<h4>Contexte — décision stratégique</h4>
+<p>Tu connais maintenant bien Mécatech. Le directeur général te présente un projet : racheter un concurrent, <strong>Précimetal SAS</strong>, pour 4 500 k€. Pour financer cette acquisition, il envisage de contracter un emprunt bancaire supplémentaire de 3 500 k€ sur 5 ans à 4,5% de taux.</p>
+<p>Ta mission : évaluer si Mécatech est bien valorisée, si elle a la capacité financière de supporter cette dette, et formuler une recommandation argumentée.</p>
+ 
+<h4>Données complémentaires pour la valorisation</h4>
+<table>
+  <tr><th>Élément</th><th>Valeur</th></tr>
+  <tr><td>Free Cash Flow année N</td><td>2 100 k€</td></tr>
+  <tr><td>Taux de croissance historique du CA (3 ans)</td><td>+5% / an</td></tr>
+  <tr><td>EBITDA année N</td><td>5 400 k€</td></tr>
+  <tr><td>Multiple EBITDA du secteur (comparables)</td><td>6x à 7x</td></tr>
+  <tr><td>Dette nette actuelle</td><td>2 800 k€</td></tr>
+  <tr><td>WACC à utiliser</td><td>8%</td></tr>
+  <tr><td>Taux de croissance perpétuelle (valeur terminale)</td><td>2%</td></tr>
+</table>
+ 
+<h4>Ce que tu dois construire dans Excel (structure libre — c'est à toi de l'organiser)</h4>
+<ul>
+  <li><span class="pill pill-purple">Partie 1</span> <strong>DCF</strong> — Projette les FCF sur 5 ans, calcule la valeur terminale, actualise tout, obtiens la valeur d'entreprise. Compare à la valeur par les multiples. Quelle est la fourchette de valorisation de Mécatech ?</li>
+  <li><span class="pill pill-purple">Partie 2</span> <strong>Capacité d'endettement</strong> — Si Mécatech contracte 3 500 k€ de dette supplémentaire, quel sera son nouveau ratio Dette nette / EBITDA ? Est-ce soutenable ? Quelle sera la charge annuelle d'intérêts et comment ça impacte le résultat net ?</li>
+  <li><span class="pill pill-purple">Partie 3</span> <strong>Analyse de sensibilité</strong> — Que se passe-t-il si la croissance tombe à 2% au lieu de 5% ? Et si l'EBITDA baisse de 15% suite à l'intégration du concurrent ? Montre 2 scénarios.</li>
+</ul>
+ 
+<h4>Livrable attendu — mémo d'une page</h4>
+<ul>
+  <li><strong>Valorisation de Mécatech</strong> : fourchette DCF et multiples</li>
+  <li><strong>Analyse de la capacité d'endettement</strong> : peut-elle absorber la dette ?</li>
+  <li><strong>Risques identifiés</strong> : 2 scénarios de stress</li>
+  <li><strong>Recommandation finale</strong> : oui ou non à l'acquisition, et à quelles conditions</li>
+</ul>
+<div class="cas-warn">Envoie ton Excel + mémo à Claude : "Corrige mon cas pratique Phase 3 — Mécatech acquisition"</div>
+</div>`,
+ 
+cas4: `<div class="cas-header">Cas pratique — Phase 4 · Diagnostic complet sur 3 entreprises réelles · Autonomie totale</div>
+<div class="cas-body">
+<div class="cas-note">Niveau : autonomie totale · Excel requis · Même niveau qu'un analyste junior en cabinet · Durée estimée : 6–7h par entreprise · 3 entreprises = ~20h</div>
+ 
+<h4>Les 3 entreprises — 3 situations radicalement différentes</h4>
+<table>
+  <tr><th>Entreprise</th><th>Ticker</th><th>Secteur</th><th>Profil financier</th></tr>
+  <tr><td><strong>Vicat</strong></td><td>VCT.PA</td><td>Matériaux / ciment</td><td class="signal-ok">Entreprise saine et rentable</td></tr>
+  <tr><td><strong>Sword Group</strong></td><td>SWP.PA</td><td>Services numériques</td><td class="signal-warn">Bonne apparence — signaux à creuser</td></tr>
+  <tr><td><strong>Clariane</strong></td><td>CLARI.PA</td><td>Maisons de retraite / santé</td><td class="signal-bad">Stress financier réel — restructuration en cours</td></tr>
+</table>
+ 
+<h4>Comment accéder aux données</h4>
+<ul>
+  <li>Va sur <strong>fr.finance.yahoo.com</strong> → tape le ticker → clique sur <strong>Financials</strong></li>
+  <li>3 onglets disponibles : <strong>Income Statement · Balance Sheet · Cash Flow</strong></li>
+  <li>Prends les données sur <strong>3 ans minimum</strong> pour voir les tendances</li>
+  <li>Note : pour Clariane, certaines données peuvent être en milliards — fais attention aux unités</li>
+</ul>
+ 
+<h4>Ce que tu produis pour chaque entreprise (structure libre)</h4>
+<ul>
+  <li><span class="pill pill-blue">Excel</span> Données brutes sur 3 ans + les 8 ratios calculés + un DCF simplifié</li>
+  <li><span class="pill pill-blue">Mémo</span> Une page maximum — contexte · points forts · vigilances · valorisation · recommandation</li>
+</ul>
+ 
+<h4>Points d'attention spécifiques par entreprise</h4>
+<table>
+  <tr><th>Entreprise</th><th>Ce sur quoi concentrer ton analyse</th></tr>
+  <tr><td><strong>Vicat</strong></td><td>Confirme que tout va bien, identifie les leviers de croissance. Est-ce que le niveau de capex est soutenable ? Le retour aux actionnaires est-il raisonnable ?</td></tr>
+  <tr><td><strong>Sword Group</strong></td><td>Les chiffres de surface sont bons. Creuse : est-ce que la croissance du CA se traduit en cash ? Le BFR évolue comment ? La marge est-elle stable ou sous pression ?</td></tr>
+  <tr><td><strong>Clariane</strong></td><td>Entreprise en difficulté réelle. Analyse la soutenabilité de la dette (levier > 4x EBITDA). Le plan de refinancement change-t-il la donne ? Si tu étais DAF, quelles seraient tes 3 priorités immédiates ?</td></tr>
+</table>
+ 
+<div class="cas-danger">Clariane est un cas de stress financier réel. Ne te contente pas de calculer les ratios — interprète ce que ça signifie concrètement pour l'entreprise et formule une recommandation de restructuration.</div>
+ 
+<h4>Critère de validation</h4>
+<p>Ton analyse est au niveau attendu quand tu peux répondre à cette question sans regarder tes notes : <em>"Si tu étais le conseiller DAF de cette entreprise, quelle serait ta priorité absolue pour les 6 prochains mois, et pourquoi ?"</em></p>
+<div class="cas-warn">Envoie tes 3 fichiers Excel + 3 mémos à Claude : "Corrige mon cas pratique Phase 4 — [nom de l'entreprise]" — un par un pour un retour détaillé.</div>
+</div>`
+ 
+};
+ 
 const PHASES=[
   {id:'p1',color:'#1D9E75',colorLight:'#E1F5EE',colorText:'#085041',
    title:'Phase 1 — Fondamentaux',sub:'Comptabilité · Finance d\'entreprise · Financement',badge:'Semaines 1–4',prereq:null,
@@ -206,7 +369,9 @@ const PHASES=[
      links:[{url:'https://www.vernimmen.net/Entrainement/Analyse_Financiere.php',label:'Vernimmen — Cours vidéo analyse financière (HEC) →'}]},
     {id:'m4',name:'Financement d\'entreprise — les bases',desc:'Dettes, fonds propres, types de financements, logique bancaire. Plateforme gratuite créée par des diplômés HEC, utilisée par des profils recrutés chez KPMG, Deloitte et BNP.',time:'10h',type:'Cours vidéo + quiz',lang:'Français',
      links:[{url:'https://www.trainy.co',label:'Trainy.co — Finance & conseil (gratuit, créé par HEC) →'}],
-     note:'Sélectionne les modules "Finance d\'entreprise" et "Financement" dans le menu.',isNew:true},
+     note:'Sélectionne les modules "Finance d\'entreprise" et "Financement" dans le menu.'},
+    {id:'m1c',name:'Cas pratique — Phase 1',desc:'Lecture et interprétation des états financiers de Mécatech Industries. Pas d\'Excel, pas de calcul complexe — juste comprendre ce que les chiffres racontent.',time:'2h',type:'Cas guidé',lang:'Français',cas:'cas1',
+     links:[]},
   ]},
   {id:'p2',color:'#185FA5',colorLight:'#E6F1FB',colorText:'#0C447C',
    title:'Phase 2 — Analyse & modélisation',sub:'Ratios · Diagnostic · Excel financier',badge:'Semaines 5–8',prereq:'Prérequis : Phase 1 complétée',
@@ -221,7 +386,9 @@ const PHASES=[
     {id:'m7',name:'Business & Financial Modeling — Wharton',desc:'Modélisation Excel, analyse de sensibilité, scénarios. Clique sur "S\'inscrire gratuitement" puis "Auditer la spécialisation".',time:'30h',type:'MOOC + TP Excel',lang:'Anglais',
      links:[{url:'https://www.coursera.org/specializations/business-financial-modeling',label:'Coursera Wharton — Financial Modeling (audit gratuit) →'}]},
     {id:'m8',name:'Tableaux de bord & reporting financier',desc:'Construire des dashboards de pilotage (KPIs, cash, résultat). Outil de communication principal du DAF externe.',time:'10h',type:'Tutoriels pratiques',lang:'Français',
-     links:[{url:'https://openclassrooms.com/fr/courses/4525361-realisez-des-dashboards-avec-power-bi',label:'OpenClassrooms — Dashboards Power BI →'}],isNew:true},
+     links:[{url:'https://openclassrooms.com/fr/courses/4525361-realisez-des-dashboards-avec-power-bi',label:'OpenClassrooms — Dashboards Power BI →'}]},
+    {id:'m2c',name:'Cas pratique — Phase 2',desc:'Diagnostic financier complet sur Mécatech : tu construis le tableau des 8 ratios dans Excel sur 2 ans, tu identifies les tendances et tu formules un diagnostic structuré.',time:'4h',type:'Cas semi-guidé · Excel',lang:'Français',cas:'cas2',
+     links:[]},
   ]},
   {id:'p3',color:'#7F77DD',colorLight:'#EEEDFE',colorText:'#3C3489',
    title:'Phase 3 — Valorisation & stratégie financière',sub:'DCF · Structure du capital · Conseil',badge:'Semaines 9–14',prereq:'Prérequis : maîtriser la modélisation (Phase 2)',
@@ -232,22 +399,24 @@ const PHASES=[
      links:[{url:'https://ocw.mit.edu/courses/15-414-financial-management-summer-2003/',label:'MIT OpenCourseWare — Financial Management →'}]},
     {id:'m11',name:'Strategy & Finance — HEC Paris',desc:'Lien entre décisions stratégiques et finance. Clique sur "S\'inscrire gratuitement" puis "Auditer le cours" pour accès gratuit aux vidéos.',time:'20h',type:'MOOC vidéo + cas',lang:'Français/Anglais',
      links:[{url:'https://www.coursera.org/learn/corporate-strategy',label:'Coursera HEC — Strategy (audit gratuit) →'}]},
-    {id:'m12',name:'Plan de financement & business plan',desc:'Construire un plan de financement à 3 ans, structurer un business plan. Mission récurrente du DAF externe. Contenu gratuit conçu pour les dirigeants de PME.',time:'10h',type:'Cours vidéo + guides',lang:'Français',
-     links:[{url:'https://www.bpifrance-universite.fr/',label:'BPIFrance Université — formations gratuites →'}],isNew:true},
+    {id:'m12',name:'Plan de financement & business plan',desc:'Construire un plan de financement à 3 ans, structurer un business plan. Mission récurrente du DAF externe.',time:'10h',type:'Cours vidéo + guides',lang:'Français',
+     links:[{url:'https://www.bpifrance-universite.fr/',label:'BPIFrance Université — formations gratuites →'}]},
+    {id:'m3c',name:'Cas pratique — Phase 3',desc:'Valorisation et décision stratégique sur Mécatech : DCF, analyse de la capacité d\'endettement pour une acquisition, 2 scénarios de stress. Structure libre, mémo de recommandation.',time:'5h',type:'Cas peu guidé · Excel libre',lang:'Français',cas:'cas3',
+     links:[]},
   ]},
   {id:'p4',color:'#BA7517',colorLight:'#FAEEDA',colorText:'#633806',
    title:'Phase 4 — Pratique & posture conseil',sub:'Cas réels guidés · Veille · Entretiens',badge:'Semaines 15–20',prereq:'Prérequis : Phases 1–3 validées',
    modules:[
-    {id:'m13',name:'Cas pratiques — 3 diagnostics d\'entreprises réelles',desc:'Exercice guidé complet sur 3 vraies PME cotées. Tu suis une méthode pas-à-pas pour produire un diagnostic financier et un mémo d\'une page par entreprise.',time:'20h',type:'Projet guidé',lang:'Français',
-     links:[{url:'https://fr.finance.yahoo.com/screener/',label:'Yahoo Finance Screener — données des entreprises →'}],cas:true},
-    {id:'m14',name:'Veille économique hebdomadaire',desc:'15 articles gratuits/mois avec un compte HBR gratuit. Créer un compte sur hbr.org → "Sign up" → 15 articles/mois débloqués. Compléter avec Les Échos (5 articles gratuits/jour).',time:'Continu',type:'Veille',lang:'Français/Anglais',
+    {id:'m4c',name:'Cas pratique — Phase 4 · 3 entreprises réelles',desc:'Vicat (saine) · Sword Group (signaux à creuser) · Clariane (stress financier réel). Autonomie totale — même niveau qu\'un analyste junior en cabinet.',time:'20h',type:'Cas autonomie totale · Excel',lang:'Français',cas:'cas4',
+     links:[{url:'https://fr.finance.yahoo.com',label:'Yahoo Finance — données gratuites →'}]},
+    {id:'m14',name:'Veille économique hebdomadaire',desc:'15 articles gratuits/mois avec un compte HBR gratuit. Créer un compte sur hbr.org → "Sign up". Compléter avec Les Échos (5 articles gratuits/jour).',time:'Continu',type:'Veille',lang:'Français/Anglais',
      links:[
        {url:'https://hbr.org/topic/subject/finance',label:'HBR — Finance (compte gratuit requis) →'},
        {url:'https://www.lesechos.fr/finance-marches',label:'Les Échos — Finance & marchés →'},
      ]},
-    {id:'m15',name:'Vernimmen — 5 chapitres essentiels',desc:'Lire uniquement ces 5 chapitres : Ch.12 Analyse financière · Ch.16 Rentabilité · Ch.21 BFR · Ch.32 Structure du capital · Ch.40 Évaluation. Pas besoin de lire les 53.',time:'15h',type:'Manuel de référence ciblé',lang:'Français',
+    {id:'m15',name:'Vernimmen — 5 chapitres essentiels',desc:'Lire uniquement : Ch.12 Analyse financière · Ch.16 Rentabilité · Ch.21 BFR · Ch.32 Structure du capital · Ch.40 Évaluation. Ces 5 couvrent 80% de ce dont tu auras besoin.',time:'15h',type:'Manuel de référence ciblé',lang:'Français',
      links:[{url:'https://www.vernimmen.net/Vernimmen/Resumes_des_chapitres.php',label:'Vernimmen — Résumés des chapitres →'}]},
-    {id:'m16',name:'Questions d\'entraînement Vernimmen',desc:'467 questions avec corrigés. Faire uniquement les thèmes : Analyse financière · BFR · Structure du capital · Évaluation.',time:'10h',type:'Quiz avec corrigés',lang:'Français',
+    {id:'m16',name:'Questions d\'entraînement Vernimmen',desc:'467 questions avec corrigés. Faire uniquement : Analyse financière · BFR · Structure du capital · Évaluation.',time:'10h',type:'Quiz avec corrigés',lang:'Français',
      links:[{url:'https://www.vernimmen.net/Entrainement/',label:'Vernimmen — 467 questions d\'entraînement →'}]},
     {id:'m17',name:'20 questions d\'entretien finance & conseil',desc:'Technicals (DCF, BFR, plan de financement), mises en situation DAF, questions comportementales.',time:'10h',type:'Q&A guidées',lang:'Anglais',
      links:[{url:'https://breakingintowallstreet.com/free/',label:'BIWS Free Resources →'}]},
@@ -255,61 +424,9 @@ const PHASES=[
      links:[{url:'https://claude.ai',label:'Ouvrir Claude pour le mock entretien →'}]},
   ]},
 ];
-
-const CAS_CONTENU=`
-<h3>Cas pratique — Diagnostic financier d'une PME cotée</h3>
-<p style="color:#666;margin-bottom:10px">À réaliser 3 fois sur 3 entreprises différentes. Chaque analyse : environ 6–7h.</p>
-<h4>Les 3 entreprises</h4>
-<table>
-  <tr><th>Entreprise</th><th>Ticker Yahoo Finance</th><th>Secteur</th><th>Pourquoi ce choix</th></tr>
-  <tr><td>Vicat</td><td>VCT.PA</td><td>Matériaux / industrie</td><td>Données complètes, modèle lisible</td></tr>
-  <tr><td>Lectra</td><td>LSS.PA</td><td>Tech / industrie</td><td>Bonne marge, croissance claire</td></tr>
-  <tr><td>Sword Group</td><td>SWP.PA</td><td>Services numériques</td><td>Cash flow excellent, modèle simple</td></tr>
-</table>
-<h4>Comment accéder aux données sur Yahoo Finance</h4>
-<ul>
-  <li>Va sur <strong>fr.finance.yahoo.com</strong> → tape le ticker (ex : VCT.PA) → clique sur <strong>Financials</strong></li>
-  <li>Tu trouveras 3 onglets : <strong>Income Statement</strong> (compte de résultat) · <strong>Balance Sheet</strong> (bilan) · <strong>Cash Flow</strong></li>
-  <li>Prends les données sur <strong>3 ans</strong> pour voir les tendances</li>
-</ul>
-<h4>Structure de ton fichier Excel (3 onglets)</h4>
-<ul>
-  <li><span class="step">Onglet 1</span> <strong>Données brutes</strong> — Recopie les chiffres clés des 3 états financiers sur 3 ans</li>
-  <li><span class="step">Onglet 2</span> <strong>Ratios</strong> — Construis et calcule les 8 ratios ci-dessous (formules à trouver toi-même)</li>
-  <li><span class="step">Onglet 3</span> <strong>DCF</strong> — Modèle de valorisation simplifié</li>
-</ul>
-<h4>Les 8 ratios à calculer (formules à trouver toi-même)</h4>
-<table>
-  <tr><th>Ratio</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th></tr>
-  <tr><td>Marge brute</td><td>Efficacité commerciale</td><td>Dépend du secteur</td></tr>
-  <tr><td>Marge EBITDA</td><td>Rentabilité opérationnelle</td><td>En dessous de 10% : vigilance</td></tr>
-  <tr><td>Ratio de liquidité courante</td><td>Capacité à payer ses dettes court terme</td><td>En dessous de 1 : danger</td></tr>
-  <tr><td>BFR en jours de CA</td><td>Besoin de financement du cycle d'exploitation</td><td>Au-dessus de 90j : lourd</td></tr>
-  <tr><td>Levier financier (Dette nette / EBITDA)</td><td>Niveau d'endettement</td><td>Au-dessus de 3x : risqué</td></tr>
-  <tr><td>ROE</td><td>Rentabilité des fonds propres</td><td>En dessous de 8% : faible</td></tr>
-  <tr><td>ROCE</td><td>Rentabilité du capital employé</td><td>Doit dépasser le coût du capital</td></tr>
-  <tr><td>Cash conversion (FCF / EBITDA)</td><td>Qualité des bénéfices</td><td>En dessous de 40% : à surveiller</td></tr>
-</table>
-<h4>DCF simplifié (Onglet 3)</h4>
-<ul>
-  <li>Projette le Free Cash Flow sur <strong>5 ans</strong> en utilisant le taux de croissance historique du CA comme hypothèse de base</li>
-  <li>Utilise un <strong>WACC de 8%</strong> comme taux d'actualisation proxy pour une PME française</li>
-  <li>Calcule une <strong>valeur terminale</strong> à partir du FCF de l'année 5 avec une croissance perpétuelle de 2%</li>
-  <li>Somme les FCF actualisés + valeur terminale actualisée = <strong>valeur intrinsèque</strong></li>
-  <li>Compare à la <strong>capitalisation boursière</strong> actuelle → l'action est-elle sous ou sur-valorisée ?</li>
-</ul>
-<h4>Mémo d'une page — structure attendue</h4>
-<ul>
-  <li><strong>1. Contexte</strong> (3 lignes) — secteur, positionnement, chiffres clés</li>
-  <li><strong>2. Points forts</strong> (2–3 bullets) — ce qui ressort positivement</li>
-  <li><strong>3. Points de vigilance</strong> (2–3 bullets) — risques ou signaux d'alerte</li>
-  <li><strong>4. Valorisation</strong> (2 lignes) — DCF vs cours de bourse, conclusion</li>
-  <li><strong>5. Recommandation</strong> (1 phrase) — si tu étais conseiller de cette entreprise, quelle serait ta priorité ?</li>
-</ul>
-<p style="margin-top:10px;color:#666"><strong>Correction :</strong> envoie ton Excel + mémo à Claude pour un retour détaillé sur tes calculs et ton raisonnement.</p>`;
-
+ 
 const TOTAL=PHASES.reduce((s,p)=>s+p.modules.length,0);
-
+ 
 function updateStats(){
   let done=0,hours=0;
   PHASES.forEach(p=>p.modules.forEach(m=>{if(state[m.id]?.done)done++;hours+=parseFloat(state[m.id]?.hours||0)}));
@@ -332,30 +449,25 @@ function updateStats(){
     const pg=document.getElementById('prog-'+p.id);if(pg)pg.textContent=pd+'/'+p.modules.length;
   });
 }
-
 function toggleModule(id){
   state[id]=state[id]||{};state[id].done=!state[id].done;
   document.getElementById('chk-'+id).classList.toggle('done',state[id].done);
   document.getElementById('name-'+id).classList.toggle('done',state[id].done);
   scheduleSave();updateStats();
 }
-function setHours(id,val){
-  state[id]=state[id]||{};state[id].hours=parseFloat(val)||0;
-  scheduleSave();updateStats();
-}
+function setHours(id,val){state[id]=state[id]||{};state[id].hours=parseFloat(val)||0;scheduleSave();updateStats();}
 function togglePhase(id){
   const b=document.getElementById('body-'+id);const c=document.getElementById('chev-'+id);
   const o=b.classList.contains('open');b.classList.toggle('open',!o);c.classList.toggle('open',!o);
 }
-function toggleCas(id){document.getElementById('cas-'+id).classList.toggle('open')}
+function toggleCas(id){document.getElementById('cas-'+id).classList.toggle('open');}
 function resetAll(){
   if(!confirm('Réinitialiser toute la progression ?'))return;
-  Object.keys(state).forEach(k=>delete state[k]);
-  scheduleSave();
-  document.getElementById('phases-container').innerHTML='';
-  render();updateStats();
+  Object.keys(state).forEach(k=>delete state[k]);scheduleSave();
+  document.getElementById('phases-container').innerHTML='';render();updateStats();
 }
 function renderLinks(links,note){
+  if(!links||links.length===0)return note?`<div class="mod-note">${note}</div>`:'';
   let h='<div class="mod-links">';
   links.forEach(l=>{h+=`<a class="mod-link" href="${l.url}" target="_blank">${l.label}</a>`});
   if(note)h+=`<div class="mod-note">${note}</div>`;
@@ -389,11 +501,10 @@ function render(){
                   <span class="tag tag-time">${m.time}</span>
                   <span class="tag tag-type">${m.type}</span>
                   <span class="tag tag-lang">${m.lang}</span>
-                  ${m.isNew?'<span class="tag tag-new">+ ajouté</span>':''}
                 </div>
                 <div class="mod-desc">${m.desc}</div>
                 ${renderLinks(m.links,m.note)}
-                ${m.cas?`<button class="cas-btn" onclick="toggleCas('${m.id}')">Voir le cas pratique guidé ▾</button><div class="cas-panel" id="cas-${m.id}">${CAS_CONTENU}</div>`:''}
+                ${m.cas?`<button class="cas-btn" onclick="toggleCas('${m.id}')">▶ Ouvrir le cas pratique</button><div class="cas-panel" id="cas-${m.id}">${CAS[m.cas]}</div>`:''}
               </div>
               <div class="mod-right">
                 <input class="hours-input" type="number" min="0" max="999" step="0.5" placeholder="0" value="${state[m.id]?.hours||''}" onchange="setHours('${m.id}',this.value)">
@@ -405,7 +516,7 @@ function render(){
     c.appendChild(d);
   });
 }
-
+ 
 loadFromCloud();
 </script>
 </body>
