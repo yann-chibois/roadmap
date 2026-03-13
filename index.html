@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap — DAF Externe & Conseil Financier</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231D9E75'/><rect x='5' y='7.5' width='3' height='3' rx='0.8' fill='white'/><rect x='10' y='8' width='13' height='2' rx='1' fill='%23A8F0D4'/><rect x='5' y='13.5' width='3' height='3' rx='0.8' fill='white'/><rect x='10' y='14' width='11' height='2' rx='1' fill='%23A8F0D4'/><rect x='5' y='19.5' width='3' height='3' rx='0.8' fill='white'/><rect x='10' y='20' width='8' height='2' rx='1' fill='%23A8F0D4'/><polyline points='20,21 22,24 27,17' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;padding:2rem 1rem}
+.container{max-width:860px;margin:0 auto}
+h1{font-size:22px;font-weight:600;margin-bottom:4px}
+.subtitle{font-size:13px;color:#6b6b67;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px}
+.sync-status{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500}
+.sync-ok{background:#E1F5EE;color:#085041}
+.sync-saving{background:#FAEEDA;color:#633806}
+.sync-error{background:#FCEBEB;color:#791F1F}
+.header-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+@media(max-width:600px){.header-stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:#fff;border-radius:10px;padding:14px 16px;border:0.5px solid #e0dfd8}
+.stat-label{font-size:10px;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.stat-value{font-size:22px;font-weight:600}
+.stat-sub{font-size:11px;color:#aaa;margin-top:2px}
+.global-bar-wrap{margin-bottom:1.5rem}
+.global-bar-label{display:flex;justify-content:space-between;font-size:12px;color:#888;margin-bottom:6px}
+.global-bar{height:8px;background:#e0dfd8;border-radius:4px;overflow:hidden}
+.global-bar-fill{height:100%;background:#1D9E75;border-radius:4px;transition:width .5s}
+.phase{background:#fff;border:0.5px solid #e0dfd8;border-radius:12px;margin-bottom:12px;overflow:hidden}
+.phase-header{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;user-select:none}
+.phase-header:hover{background:#fafaf8}
+.phase-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.phase-title-wrap{flex:1}
+.phase-title{font-size:14px;font-weight:600}
+.phase-sub{font-size:11px;color:#888;margin-top:2px}
+.phase-badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;flex-shrink:0}
+.phase-prog{font-size:11px;color:#888;flex-shrink:0;min-width:36px;text-align:right}
+.phase-chev{font-size:10px;color:#bbb;transition:transform .2s;flex-shrink:0}
+.phase-chev.open{transform:rotate(90deg)}
+.phase-bar-track{height:3px;background:#f0efe8}
+.phase-bar-fill{height:100%;transition:width .4s}
+.phase-body{display:none;border-top:0.5px solid #e0dfd8}
+.phase-body.open{display:block}
+.prereq{font-size:11px;color:#aaa;padding:8px 16px;font-style:italic;background:#fafaf8}
+.module{padding:14px 16px;border-bottom:0.5px solid #f0efe8}
+.module:last-child{border-bottom:none}
+.module-row{display:flex;align-items:flex-start;gap:10px}
+.check{width:18px;height:18px;border-radius:4px;border:1.5px solid #ccc;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;margin-top:2px}
+.check.done{background:#1D9E75;border-color:#1D9E75}
+.check.done::after{content:'';width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px);display:block}
+.mod-info{flex:1}
+.mod-name{font-size:13px;font-weight:600;line-height:1.4}
+.mod-name.done{text-decoration:line-through;color:#bbb}
+.mod-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.tag{font-size:10px;padding:2px 7px;border-radius:10px}
+.tag-time{background:#E6F1FB;color:#0C447C}
+.tag-type{background:#EEEDFE;color:#3C3489}
+.tag-lang{background:#f1efe8;color:#555}
+.tag-new{background:#E1F5EE;color:#085041}
+.mod-desc{font-size:12px;color:#666;margin-top:5px;line-height:1.55}
+.mod-links{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.mod-link{font-size:11px;color:#185FA5;text-decoration:none;display:inline-block}
+.mod-link:hover{text-decoration:underline}
+.mod-note{font-size:10px;color:#aaa;font-style:italic;margin-top:2px}
+.mod-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.hours-input{width:54px;height:28px;font-size:12px;text-align:center;border:0.5px solid #ccc;border-radius:6px;background:#fff;color:#1a1a1a}
+.hours-input:focus{outline:none;border-color:#1D9E75}
+.hours-label{font-size:10px;color:#aaa;text-align:right;line-height:1.3}
+.cas-btn{display:inline-block;margin-top:6px;font-size:11px;font-weight:500;color:#085041;background:#E1F5EE;border:none;border-radius:6px;padding:5px 10px;cursor:pointer}
+.cas-btn:hover{background:#9FE1CB}
+.cas-panel{display:none;margin-top:10px;background:#fafaf8;border:0.5px solid #e0dfd8;border-radius:8px;padding:14px;font-size:12px;color:#333;line-height:1.7}
+.cas-panel.open{display:block}
+.cas-panel h3{font-size:13px;font-weight:600;margin-bottom:8px;color:#1a1a1a}
+.cas-panel h4{font-size:12px;font-weight:600;margin:10px 0 4px;color:#1a1a1a}
+.cas-panel ul{padding-left:16px;margin:4px 0}
+.cas-panel li{margin-bottom:3px}
+.cas-panel .step{background:#E6F1FB;color:#0C447C;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;margin-right:6px}
+.cas-panel table{width:100%;border-collapse:collapse;margin:6px 0;font-size:11px}
+.cas-panel table th{background:#f0efe8;padding:4px 8px;text-align:left;font-weight:600}
+.cas-panel table td{padding:4px 8px;border-bottom:0.5px solid #e0dfd8}
+.footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:8px}
+.reset-btn{font-size:12px;color:#888;cursor:pointer;border:0.5px solid #ddd;border-radius:6px;padding:5px 12px;background:#fff}
+.reset-btn:hover{background:#f5f4f0}
+.footer-tip{font-size:11px;color:#bbb;font-style:italic}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Roadmap — DAF Externe &amp; Conseil Financier</h1>
+  <p class="subtitle">
+    Formation pré-master · 18 modules · ~200h · 100% gratuit
+    <span class="sync-status sync-ok" id="sync-status">✓ Synchronisé</span>
+  </p>
+  <div class="header-stats">
+    <div class="stat"><div class="stat-label">Modules validés</div><div class="stat-value" id="s-done">0/18</div><div class="stat-sub">étapes complétées</div></div>
+    <div class="stat"><div class="stat-label">Heures investies</div><div class="stat-value" id="s-hours">0h</div><div class="stat-sub">sur ~200h estimées</div></div>
+    <div class="stat"><div class="stat-label">Phase actuelle</div><div class="stat-value" id="s-phase">1/4</div><div class="stat-sub" id="s-phase-name">Fondamentaux</div></div>
+    <div class="stat"><div class="stat-label">Progression</div><div class="stat-value" id="s-pct">0%</div><div class="stat-sub">vers le master</div></div>
+  </div>
+  <div class="global-bar-wrap">
+    <div class="global-bar-label"><span>Débutant</span><span>Niveau DAF / Conseil</span></div>
+    <div class="global-bar"><div class="global-bar-fill" id="global-fill" style="width:0%"></div></div>
+  </div>
+  <div id="phases-container"></div>
+  <div class="footer">
+    <button class="reset-btn" onclick="resetAll()">Réinitialiser la progression</button>
+    <span class="footer-tip">Progression synchronisée sur tous tes appareils</span>
+  </div>
+</div>
+
+<script>
+const API_KEY = '$2a$10$5M9.tjyDJ2OTKuK11Cy5s.NNJVRhTsWTdX.49MXhTKCdCjBpaSZtO';
+const BIN_NAME = 'roadmap-yann';
+let BIN_ID = localStorage.getItem('jsonbin_id') || null;
+let saveTimer = null;
+let state = {};
+
+async function loadFromCloud() {
+  setStatus('loading');
+  try {
+    if (!BIN_ID) {
+      const local = localStorage.getItem('roadmap_daf_v5');
+      if (local) state = JSON.parse(local);
+      await createBin();
+    } else {
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+        headers: { 'X-Master-Key': API_KEY }
+      });
+      const data = await res.json();
+      state = data.record || {};
+    }
+    setStatus('ok');
+    render();
+    updateStats();
+  } catch(e) {
+    const local = localStorage.getItem('roadmap_daf_v5');
+    if (local) state = JSON.parse(local);
+    setStatus('error');
+    render();
+    updateStats();
+  }
+}
+
+async function createBin() {
+  const res = await fetch('https://api.jsonbin.io/v3/b', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Master-Key': API_KEY,
+      'X-Bin-Name': BIN_NAME,
+      'X-Bin-Private': 'true'
+    },
+    body: JSON.stringify(state)
+  });
+  const data = await res.json();
+  BIN_ID = data.metadata.id;
+  localStorage.setItem('jsonbin_id', BIN_ID);
+}
+
+async function saveToCloud() {
+  setStatus('saving');
+  try {
+    if (!BIN_ID) await createBin();
+    await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': API_KEY
+      },
+      body: JSON.stringify(state)
+    });
+    localStorage.setItem('roadmap_daf_v5', JSON.stringify(state));
+    setStatus('ok');
+  } catch(e) {
+    localStorage.setItem('roadmap_daf_v5', JSON.stringify(state));
+    setStatus('error');
+  }
+}
+
+function scheduleSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveToCloud, 1000);
+}
+
+function setStatus(s) {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  if (s === 'ok') { el.className='sync-status sync-ok'; el.textContent='✓ Synchronisé'; }
+  else if (s === 'saving') { el.className='sync-status sync-saving'; el.textContent='⟳ Sauvegarde...'; }
+  else if (s === 'loading') { el.className='sync-status sync-saving'; el.textContent='⟳ Chargement...'; }
+  else { el.className='sync-status sync-error'; el.textContent='⚠ Hors ligne (local)'; }
+}
+
+const PHASES=[
+  {id:'p1',color:'#1D9E75',colorLight:'#E1F5EE',colorText:'#085041',
+   title:'Phase 1 — Fondamentaux',sub:'Comptabilité · Finance d\'entreprise · Financement',badge:'Semaines 1–4',prereq:null,
+   modules:[
+    {id:'m1',name:'Bases de la comptabilité',desc:'Bilan, compte de résultat, flux de trésorerie. Le socle absolu pour lire et analyser les états financiers d\'un client.',time:'15h',type:'Cours interactif',lang:'Français',
+     links:[{url:'https://openclassrooms.com/fr/courses/4801106-initiez-vous-a-la-comptabilite',label:'OpenClassrooms — Initiez-vous à la comptabilité →'}]},
+    {id:'m2',name:'Finance d\'entreprise — bases',desc:'Valeur temps de l\'argent, actualisation, VAN, TRI, coût du capital. Suis les 3 unités dans l\'ordre — ignore les autres (housing, taxes, derivatives : pas utiles pour ton profil).',time:'20h',type:'Cours interactif',lang:'Anglais',
+     links:[
+       {url:'https://www.khanacademy.org/economics-finance-domain/core-finance/interest-tutorial',label:'Khan — Unit 1 : Interest and debt →'},
+       {url:'https://www.khanacademy.org/economics-finance-domain/core-finance/accounting-and-financial-stateme',label:'Khan — Unit 5 : Accounting & financial statements →'},
+       {url:'https://www.khanacademy.org/economics-finance-domain/core-finance/stock-and-bonds',label:'Khan — Unit 6 : Stocks and bonds →'},
+     ]},
+    {id:'m3',name:'Trésorerie & gestion du BFR',desc:'Besoin en fonds de roulement, cycle d\'exploitation, gestion des flux. Sujet n°1 du DAF externe. Vidéos enregistrées du cours HEC, directement accessibles.',time:'15h',type:'Vidéos cours HEC',lang:'Français',
+     links:[{url:'https://www.vernimmen.net/Entrainement/Analyse_Financiere.php',label:'Vernimmen — Cours vidéo analyse financière (HEC) →'}]},
+    {id:'m4',name:'Financement d\'entreprise — les bases',desc:'Dettes, fonds propres, types de financements, logique bancaire. Plateforme gratuite créée par des diplômés HEC, utilisée par des profils recrutés chez KPMG, Deloitte et BNP.',time:'10h',type:'Cours vidéo + quiz',lang:'Français',
+     links:[{url:'https://www.trainy.co',label:'Trainy.co — Finance & conseil (gratuit, créé par HEC) →'}],
+     note:'Sélectionne les modules "Finance d\'entreprise" et "Financement" dans le menu.',isNew:true},
+  ]},
+  {id:'p2',color:'#185FA5',colorLight:'#E6F1FB',colorText:'#0C447C',
+   title:'Phase 2 — Analyse & modélisation',sub:'Ratios · Diagnostic · Excel financier',badge:'Semaines 5–8',prereq:'Prérequis : Phase 1 complétée',
+   modules:[
+    {id:'m5',name:'Ratios & diagnostic financier',desc:'Liquidité, solvabilité, rentabilité, levier. Lire uniquement les chapitres 12 (analyse financière) et 16 (rentabilité) du Vernimmen — les 2 chapitres directement opérationnels pour un DAF.',time:'20h',type:'Cours vidéo + lectures ciblées',lang:'Français',
+     links:[
+       {url:'https://www.vernimmen.net/Entrainement/Analyse_Financiere.php',label:'Vernimmen — Cours vidéo analyse financière →'},
+       {url:'https://www.trainy.co',label:'Trainy.co — Module analyse financière →'},
+     ]},
+    {id:'m6',name:'Finance d\'entreprise — Coursera CFI',desc:'Introduction complète : états financiers, ratios, DCF de base. Clique sur "S\'inscrire gratuitement" puis choisis "Auditer le cours" pour accès gratuit.',time:'15h',type:'MOOC vidéo + quiz',lang:'Anglais',
+     links:[{url:'https://www.coursera.org/learn/corporate-finance-fundamentals',label:'Coursera CFI — Corporate Finance Fundamentals (audit gratuit) →'}]},
+    {id:'m7',name:'Business & Financial Modeling — Wharton',desc:'Modélisation Excel, analyse de sensibilité, scénarios. Clique sur "S\'inscrire gratuitement" puis "Auditer la spécialisation".',time:'30h',type:'MOOC + TP Excel',lang:'Anglais',
+     links:[{url:'https://www.coursera.org/specializations/business-financial-modeling',label:'Coursera Wharton — Financial Modeling (audit gratuit) →'}]},
+    {id:'m8',name:'Tableaux de bord & reporting financier',desc:'Construire des dashboards de pilotage (KPIs, cash, résultat). Outil de communication principal du DAF externe.',time:'10h',type:'Tutoriels pratiques',lang:'Français',
+     links:[{url:'https://openclassrooms.com/fr/courses/4525361-realisez-des-dashboards-avec-power-bi',label:'OpenClassrooms — Dashboards Power BI →'}],isNew:true},
+  ]},
+  {id:'p3',color:'#7F77DD',colorLight:'#EEEDFE',colorText:'#3C3489',
+   title:'Phase 3 — Valorisation & stratégie financière',sub:'DCF · Structure du capital · Conseil',badge:'Semaines 9–14',prereq:'Prérequis : maîtriser la modélisation (Phase 2)',
+   modules:[
+    {id:'m9',name:'Valorisation d\'entreprises — Damodaran (NYU)',desc:'25 vidéos courtes (12–20 min) sur le DCF, les multiples, l\'évaluation d\'actifs. Slides téléchargeables + tests corrigés inclus. 100% gratuit, aucune inscription.',time:'30h',type:'Vidéos + tests corrigés',lang:'Anglais',
+     links:[{url:'https://pages.stern.nyu.edu/~adamodar/New_Home_Page/webcastvalonline.htm',label:'NYU Stern — Damodaran Valuation Online Course →'}]},
+    {id:'m10',name:'Corporate Finance MIT (15.414)',desc:'Structure du capital, politique de dividendes, fusions-acquisitions, gestion du risque. Niveau master, slides + exercices corrigés téléchargeables.',time:'25h',type:'Cours + exercices',lang:'Anglais',
+     links:[{url:'https://ocw.mit.edu/courses/15-414-financial-management-summer-2003/',label:'MIT OpenCourseWare — Financial Management →'}]},
+    {id:'m11',name:'Strategy & Finance — HEC Paris',desc:'Lien entre décisions stratégiques et finance. Clique sur "S\'inscrire gratuitement" puis "Auditer le cours" pour accès gratuit aux vidéos.',time:'20h',type:'MOOC vidéo + cas',lang:'Français/Anglais',
+     links:[{url:'https://www.coursera.org/learn/corporate-strategy',label:'Coursera HEC — Strategy (audit gratuit) →'}]},
+    {id:'m12',name:'Plan de financement & business plan',desc:'Construire un plan de financement à 3 ans, structurer un business plan. Mission récurrente du DAF externe. Contenu gratuit conçu pour les dirigeants de PME.',time:'10h',type:'Cours vidéo + guides',lang:'Français',
+     links:[{url:'https://www.bpifrance-universite.fr/',label:'BPIFrance Université — formations gratuites →'}],isNew:true},
+  ]},
+  {id:'p4',color:'#BA7517',colorLight:'#FAEEDA',colorText:'#633806',
+   title:'Phase 4 — Pratique & posture conseil',sub:'Cas réels guidés · Veille · Entretiens',badge:'Semaines 15–20',prereq:'Prérequis : Phases 1–3 validées',
+   modules:[
+    {id:'m13',name:'Cas pratiques — 3 diagnostics d\'entreprises réelles',desc:'Exercice guidé complet sur 3 vraies PME cotées. Tu suis une méthode pas-à-pas pour produire un diagnostic financier et un mémo d\'une page par entreprise.',time:'20h',type:'Projet guidé',lang:'Français',
+     links:[{url:'https://fr.finance.yahoo.com/screener/',label:'Yahoo Finance Screener — données des entreprises →'}],cas:true},
+    {id:'m14',name:'Veille économique hebdomadaire',desc:'15 articles gratuits/mois avec un compte HBR gratuit. Créer un compte sur hbr.org → "Sign up" → 15 articles/mois débloqués. Compléter avec Les Échos (5 articles gratuits/jour).',time:'Continu',type:'Veille',lang:'Français/Anglais',
+     links:[
+       {url:'https://hbr.org/topic/subject/finance',label:'HBR — Finance (compte gratuit requis) →'},
+       {url:'https://www.lesechos.fr/finance-marches',label:'Les Échos — Finance & marchés →'},
+     ]},
+    {id:'m15',name:'Vernimmen — 5 chapitres essentiels',desc:'Lire uniquement ces 5 chapitres : Ch.12 Analyse financière · Ch.16 Rentabilité · Ch.21 BFR · Ch.32 Structure du capital · Ch.40 Évaluation. Pas besoin de lire les 53.',time:'15h',type:'Manuel de référence ciblé',lang:'Français',
+     links:[{url:'https://www.vernimmen.net/Vernimmen/Resumes_des_chapitres.php',label:'Vernimmen — Résumés des chapitres →'}]},
+    {id:'m16',name:'Questions d\'entraînement Vernimmen',desc:'467 questions avec corrigés. Faire uniquement les thèmes : Analyse financière · BFR · Structure du capital · Évaluation.',time:'10h',type:'Quiz avec corrigés',lang:'Français',
+     links:[{url:'https://www.vernimmen.net/Entrainement/',label:'Vernimmen — 467 questions d\'entraînement →'}]},
+    {id:'m17',name:'20 questions d\'entretien finance & conseil',desc:'Technicals (DCF, BFR, plan de financement), mises en situation DAF, questions comportementales.',time:'10h',type:'Q&A guidées',lang:'Anglais',
+     links:[{url:'https://breakingintowallstreet.com/free/',label:'BIWS Free Resources →'}]},
+    {id:'m18',name:'Mock entretien DAF / conseil',desc:'Simule un entretien complet avec Claude : diagnostic financier d\'une PME, questions techniques, présentation d\'un mémo.',time:'5h',type:'Pratique orale',lang:'Français',
+     links:[{url:'https://claude.ai',label:'Ouvrir Claude pour le mock entretien →'}]},
+  ]},
+];
+
+const CAS_CONTENU=`
+<h3>Cas pratique — Diagnostic financier d'une PME cotée</h3>
+<p style="color:#666;margin-bottom:10px">À réaliser 3 fois sur 3 entreprises différentes. Chaque analyse : environ 6–7h.</p>
+<h4>Les 3 entreprises</h4>
+<table>
+  <tr><th>Entreprise</th><th>Ticker Yahoo Finance</th><th>Secteur</th><th>Pourquoi ce choix</th></tr>
+  <tr><td>Vicat</td><td>VCT.PA</td><td>Matériaux / industrie</td><td>Données complètes, modèle lisible</td></tr>
+  <tr><td>Lectra</td><td>LSS.PA</td><td>Tech / industrie</td><td>Bonne marge, croissance claire</td></tr>
+  <tr><td>Sword Group</td><td>SWP.PA</td><td>Services numériques</td><td>Cash flow excellent, modèle simple</td></tr>
+</table>
+<h4>Comment accéder aux données sur Yahoo Finance</h4>
+<ul>
+  <li>Va sur <strong>fr.finance.yahoo.com</strong> → tape le ticker (ex : VCT.PA) → clique sur <strong>Financials</strong></li>
+  <li>Tu trouveras 3 onglets : <strong>Income Statement</strong> (compte de résultat) · <strong>Balance Sheet</strong> (bilan) · <strong>Cash Flow</strong></li>
+  <li>Prends les données sur <strong>3 ans</strong> pour voir les tendances</li>
+</ul>
+<h4>Structure de ton fichier Excel (3 onglets)</h4>
+<ul>
+  <li><span class="step">Onglet 1</span> <strong>Données brutes</strong> — Recopie les chiffres clés des 3 états financiers sur 3 ans</li>
+  <li><span class="step">Onglet 2</span> <strong>Ratios</strong> — Construis et calcule les 8 ratios ci-dessous (formules à trouver toi-même)</li>
+  <li><span class="step">Onglet 3</span> <strong>DCF</strong> — Modèle de valorisation simplifié</li>
+</ul>
+<h4>Les 8 ratios à calculer (formules à trouver toi-même)</h4>
+<table>
+  <tr><th>Ratio</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th></tr>
+  <tr><td>Marge brute</td><td>Efficacité commerciale</td><td>Dépend du secteur</td></tr>
+  <tr><td>Marge EBITDA</td><td>Rentabilité opérationnelle</td><td>En dessous de 10% : vigilance</td></tr>
+  <tr><td>Ratio de liquidité courante</td><td>Capacité à payer ses dettes court terme</td><td>En dessous de 1 : danger</td></tr>
+  <tr><td>BFR en jours de CA</td><td>Besoin de financement du cycle d'exploitation</td><td>Au-dessus de 90j : lourd</td></tr>
+  <tr><td>Levier financier (Dette nette / EBITDA)</td><td>Niveau d'endettement</td><td>Au-dessus de 3x : risqué</td></tr>
+  <tr><td>ROE</td><td>Rentabilité des fonds propres</td><td>En dessous de 8% : faible</td></tr>
+  <tr><td>ROCE</td><td>Rentabilité du capital employé</td><td>Doit dépasser le coût du capital</td></tr>
+  <tr><td>Cash conversion (FCF / EBITDA)</td><td>Qualité des bénéfices</td><td>En dessous de 40% : à surveiller</td></tr>
+</table>
+<h4>DCF simplifié (Onglet 3)</h4>
+<ul>
+  <li>Projette le Free Cash Flow sur <strong>5 ans</strong> en utilisant le taux de croissance historique du CA comme hypothèse de base</li>
+  <li>Utilise un <strong>WACC de 8%</strong> comme taux d'actualisation proxy pour une PME française</li>
+  <li>Calcule une <strong>valeur terminale</strong> à partir du FCF de l'année 5 avec une croissance perpétuelle de 2%</li>
+  <li>Somme les FCF actualisés + valeur terminale actualisée = <strong>valeur intrinsèque</strong></li>
+  <li>Compare à la <strong>capitalisation boursière</strong> actuelle → l'action est-elle sous ou sur-valorisée ?</li>
+</ul>
+<h4>Mémo d'une page — structure attendue</h4>
+<ul>
+  <li><strong>1. Contexte</strong> (3 lignes) — secteur, positionnement, chiffres clés</li>
+  <li><strong>2. Points forts</strong> (2–3 bullets) — ce qui ressort positivement</li>
+  <li><strong>3. Points de vigilance</strong> (2–3 bullets) — risques ou signaux d'alerte</li>
+  <li><strong>4. Valorisation</strong> (2 lignes) — DCF vs cours de bourse, conclusion</li>
+  <li><strong>5. Recommandation</strong> (1 phrase) — si tu étais conseiller de cette entreprise, quelle serait ta priorité ?</li>
+</ul>
+<p style="margin-top:10px;color:#666"><strong>Correction :</strong> envoie ton Excel + mémo à Claude pour un retour détaillé sur tes calculs et ton raisonnement.</p>`;
+
+const TOTAL=PHASES.reduce((s,p)=>s+p.modules.length,0);
+
+function updateStats(){
+  let done=0,hours=0;
+  PHASES.forEach(p=>p.modules.forEach(m=>{if(state[m.id]?.done)done++;hours+=parseFloat(state[m.id]?.hours||0)}));
+  const pct=Math.round(done/TOTAL*100);
+  document.getElementById('s-done').textContent=done+'/'+TOTAL;
+  document.getElementById('s-hours').textContent=Math.round(hours)+'h';
+  document.getElementById('s-pct').textContent=pct+'%';
+  document.getElementById('global-fill').style.width=pct+'%';
+  let cp=1,cn='Fondamentaux';
+  PHASES.forEach((p,i)=>{
+    const pd=p.modules.filter(m=>state[m.id]?.done).length;
+    if(pd===p.modules.length&&i<PHASES.length-1){cp=i+2;cn=PHASES[i+1].title.split('—')[1].trim()}
+    else if(pd>0&&cp<=i+1){cp=i+1;cn=p.title.split('—')[1].trim()}
+  });
+  document.getElementById('s-phase').textContent=cp+'/4';
+  document.getElementById('s-phase-name').textContent=cn;
+  PHASES.forEach(p=>{
+    const pd=p.modules.filter(m=>state[m.id]?.done).length;
+    const b=document.getElementById('bar-'+p.id);if(b)b.style.width=(pd/p.modules.length*100)+'%';
+    const pg=document.getElementById('prog-'+p.id);if(pg)pg.textContent=pd+'/'+p.modules.length;
+  });
+}
+
+function toggleModule(id){
+  state[id]=state[id]||{};state[id].done=!state[id].done;
+  document.getElementById('chk-'+id).classList.toggle('done',state[id].done);
+  document.getElementById('name-'+id).classList.toggle('done',state[id].done);
+  scheduleSave();updateStats();
+}
+function setHours(id,val){
+  state[id]=state[id]||{};state[id].hours=parseFloat(val)||0;
+  scheduleSave();updateStats();
+}
+function togglePhase(id){
+  const b=document.getElementById('body-'+id);const c=document.getElementById('chev-'+id);
+  const o=b.classList.contains('open');b.classList.toggle('open',!o);c.classList.toggle('open',!o);
+}
+function toggleCas(id){document.getElementById('cas-'+id).classList.toggle('open')}
+function resetAll(){
+  if(!confirm('Réinitialiser toute la progression ?'))return;
+  Object.keys(state).forEach(k=>delete state[k]);
+  scheduleSave();
+  document.getElementById('phases-container').innerHTML='';
+  render();updateStats();
+}
+function renderLinks(links,note){
+  let h='<div class="mod-links">';
+  links.forEach(l=>{h+=`<a class="mod-link" href="${l.url}" target="_blank">${l.label}</a>`});
+  if(note)h+=`<div class="mod-note">${note}</div>`;
+  return h+'</div>';
+}
+function render(){
+  const c=document.getElementById('phases-container');
+  PHASES.forEach((p,pi)=>{
+    const d=document.createElement('div');d.className='phase';
+    d.innerHTML=`
+      <div class="phase-header" onclick="togglePhase('${p.id}')">
+        <div class="phase-dot" style="background:${p.color}"></div>
+        <div class="phase-title-wrap">
+          <div class="phase-title">${p.title}</div>
+          <div class="phase-sub">${p.sub}</div>
+        </div>
+        <span class="phase-badge" style="background:${p.colorLight};color:${p.colorText}">${p.badge}</span>
+        <span class="phase-prog" id="prog-${p.id}">0/${p.modules.length}</span>
+        <span class="phase-chev${pi===0?' open':''}" id="chev-${p.id}">▶</span>
+      </div>
+      <div class="phase-bar-track"><div id="bar-${p.id}" class="phase-bar-fill" style="background:${p.color};width:0%"></div></div>
+      <div class="phase-body${pi===0?' open':''}" id="body-${p.id}">
+        ${p.prereq?`<div class="prereq">${p.prereq}</div>`:''}
+        ${p.modules.map(m=>`
+          <div class="module">
+            <div class="module-row">
+              <div class="check${state[m.id]?.done?' done':''}" id="chk-${m.id}" onclick="toggleModule('${m.id}')"></div>
+              <div class="mod-info">
+                <div class="mod-name${state[m.id]?.done?' done':''}" id="name-${m.id}">${m.name}</div>
+                <div class="mod-tags">
+                  <span class="tag tag-time">${m.time}</span>
+                  <span class="tag tag-type">${m.type}</span>
+                  <span class="tag tag-lang">${m.lang}</span>
+                  ${m.isNew?'<span class="tag tag-new">+ ajouté</span>':''}
+                </div>
+                <div class="mod-desc">${m.desc}</div>
+                ${renderLinks(m.links,m.note)}
+                ${m.cas?`<button class="cas-btn" onclick="toggleCas('${m.id}')">Voir le cas pratique guidé ▾</button><div class="cas-panel" id="cas-${m.id}">${CAS_CONTENU}</div>`:''}
+              </div>
+              <div class="mod-right">
+                <input class="hours-input" type="number" min="0" max="999" step="0.5" placeholder="0" value="${state[m.id]?.hours||''}" onchange="setHours('${m.id}',this.value)">
+                <div class="hours-label">heures<br>passées</div>
+              </div>
+            </div>
+          </div>`).join('')}
+      </div>`;
+    c.appendChild(d);
+  });
+}
+
+loadFromCloud();
+</script>
+</body>
+</html>
