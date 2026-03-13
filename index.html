@@ -91,6 +91,26 @@ h1{font-size:22px;font-weight:600;margin-bottom:4px}
 .cas-note{background:#E6F1FB;border-left:3px solid #185FA5;padding:8px 12px;margin:10px 0;font-size:11px;color:#0C447C;border-radius:0 6px 6px 0}
 .cas-warn{background:#FAEEDA;border-left:3px solid #BA7517;padding:8px 12px;margin:10px 0;font-size:11px;color:#633806;border-radius:0 6px 6px 0}
 .cas-danger{background:#FCEBEB;border-left:3px solid #A32D2D;padding:8px 12px;margin:10px 0;font-size:11px;color:#791F1F;border-radius:0 6px 6px 0}
+/* ── Corrigés ── */
+.cor-sep{height:1px;background:#e0dfd8;margin:12px 0}
+.cor-btn{display:inline-flex;align-items:center;gap:6px;margin-top:4px;font-size:11px;font-weight:500;color:#3C3489;background:#EEEDFE;border:none;border-radius:6px;padding:5px 11px;cursor:pointer}
+.cor-btn:hover{background:#D4D2F5}
+.cor-panel{display:none;margin-top:8px;border:0.5px solid #c8c5f5;border-radius:8px;overflow:hidden}
+.cor-panel.open{display:block}
+.cor-header{background:#EEEDFE;padding:10px 16px;font-size:12px;font-weight:600;color:#3C3489}
+.cor-body{background:#fafafe;padding:14px 16px;font-size:11.5px;color:#333;line-height:1.7}
+.cor-body h4{font-size:11.5px;font-weight:600;margin:12px 0 5px;color:#1a1a1a;padding-bottom:3px;border-bottom:0.5px solid #e0dff5}
+.cor-body h4:first-child{margin-top:0}
+.cor-body ul{padding-left:16px;margin:3px 0}
+.cor-body li{margin-bottom:3px}
+.cor-body p{margin-bottom:5px}
+.cor-body table{width:100%;border-collapse:collapse;margin:6px 0;font-size:11px}
+.cor-body table th{background:#EEEDFE;padding:4px 7px;text-align:left;font-weight:600;border:0.5px solid #c8c5f5;color:#3C3489}
+.cor-body table td{padding:4px 7px;border:0.5px solid #e5e5f5;vertical-align:top}
+.cor-spoiler{background:#FAEEDA;border-left:3px solid #BA7517;padding:7px 11px;margin:0 0 10px;font-size:11px;color:#633806;border-radius:0 6px 6px 0}
+.cor-ok{color:#085041;font-weight:600}
+.cor-warn{color:#633806;font-weight:600}
+.cor-bad{color:#791F1F;font-weight:600}
 .footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:8px}
 .reset-btn{font-size:12px;color:#888;cursor:pointer;border:0.5px solid #ddd;border-radius:6px;padding:5px 12px;background:#fff}
 .reset-btn:hover{background:#f5f4f0}
@@ -206,7 +226,7 @@ cas1: `<div class="cas-header">Cas pratique — Phase 1 · Lecture des états fi
   <tr><td><strong>Total actif</strong></td><td><strong>21 800</strong></td><td><strong>Total passif</strong></td><td><strong>21 800</strong></td></tr>
 </table>
  
-<h4>Questions — réponds à chacune par écrit avant de demander une correction à Claude</h4>
+<h4>Questions — réponds à chacune par écrit avant de consulter le corrigé</h4>
 <ul>
   <li><span class="pill pill-blue">Q1</span> Quel est le chiffre d'affaires de Mécatech ? À quoi correspond-il concrètement dans leur activité ?</li>
   <li><span class="pill pill-blue">Q2</span> La marge brute est de 17 500 k€. Qu'est-ce que ça représente en % du CA ? Est-ce que c'est bon pour une industrie manufacturière ?</li>
@@ -215,7 +235,28 @@ cas1: `<div class="cas-header">Cas pratique — Phase 1 · Lecture des états fi
   <li><span class="pill pill-blue">Q5</span> Les créances clients sont de 5 600 k€ et les dettes fournisseurs de 4 200 k€. Qu'est-ce que ça t'indique sur la gestion du cycle client/fournisseur ?</li>
   <li><span class="pill pill-blue">Q6</span> Le directeur veut embaucher 20 personnes. Ça représente environ 1 100 k€ de charges supplémentaires par an. En regardant uniquement les états financiers, est-ce que tu lui conseilles de le faire ? Pourquoi ?</li>
 </ul>
-<div class="cas-warn">Une fois tes réponses rédigées, envoie-les à Claude avec le message : "Corrige mon cas pratique Phase 1 — Mécatech" et colle tes réponses.</div>
+<div class="cor-sep"></div>
+<button class="cor-btn" onclick="toggleCor('m1c')">🔓 Voir le corrigé (après avoir répondu)</button>
+<div class="cor-panel" id="cor-m1c">
+<div class="cor-header">✓ Corrigé — Phase 1 · Mécatech Industries</div>
+<div class="cor-body">
+<div class="cor-spoiler">⚠️ Corrigé indicatif — plusieurs formulations sont valables tant qu'elles s'appuient sur les bons chiffres.</div>
+<h4>Q1 — Le chiffre d'affaires</h4>
+<p>CA = 42 000 k€. Concrètement = le montant total des ventes de pièces métalliques à leurs clients automobiles sur l'année N. C'est le "haut" du compte de résultat — aucun coût n'est encore déduit. Il ne dit rien sur la rentabilité.</p>
+<h4>Q2 — La marge brute</h4>
+<p>Marge brute % = 17 500 / 42 000 = <strong class="cor-ok">41,7 %</strong>. Pour l'industrie manufacturière auto : honnête. Les sous-traitants industriels sont généralement entre 30 % et 50 %. Cela signifie que pour chaque euro vendu, Mécatech conserve 41,7 centimes après ses achats et charges externes.</p>
+<h4>Q3 — La rentabilité</h4>
+<p><strong class="cor-ok">Oui, l'entreprise est rentable.</strong> EBIT = 3 600 k€ (marge d'exploitation = 3 600/42 000 = 8,6 %) → profits d'exploitation solides. Résultat net = 2 340 k€ (marge nette = 5,6 %) → après intérêts et impôts, le bénéfice reste positif. Aucune ligne ne montre de perte.</p>
+<h4>Q4 — Trésorerie vs dette</h4>
+<p>Trésorerie = 3 200 k€, dette LT = 6 000 k€ → elle NE PEUT PAS rembourser l'intégralité de sa dette demain. Mais ce n'est pas la bonne question : la dette LT n'est pas exigible immédiatement. La vraie mesure = liquidité à court terme :</p>
+<p>Actif courant = 3 800 + 5 600 + 3 200 = <strong>12 600 k€</strong> · Passif courant = 4 200 + 200 = <strong>4 400 k€</strong></p>
+<p>Ratio de liquidité générale = 12 600 / 4 400 = <strong class="cor-ok">2,86×</strong> → très bon (seuil d'alerte < 1×). L'entreprise peut faire face à ses engagements court terme.</p>
+<h4>Q5 — Cycle client/fournisseur</h4>
+<p>DSO (délai clients) = 5 600 / 42 000 × 365 = <strong>48,7 jours</strong>. DPO (délai fournisseurs) = 4 200 / 24 500 × 365 = <strong>62,5 jours</strong>. Elle paye ses fournisseurs en 63 jours mais encaisse ses clients en 49 jours → ses fournisseurs la "financent" plus longtemps qu'elle ne fait crédit. BFR = 3 800 + 5 600 − 4 200 = 5 200 k€ = <strong>45 jours de CA</strong> → raisonnable.</p>
+<h4>Q6 — Embaucher ou pas ?</h4>
+<p>Avec +1 100 k€ de charges salariales, l'EBIT passerait à 2 500 k€, le RN à ~1 575 k€. L'entreprise resterait rentable. Surtout : le Free Cash Flow est de ~2 100 k€/an (voir Phase 2) ce qui couvre largement 1 100 k€. <strong class="cor-ok">Conseil : oui, embaucher.</strong> Conditions : s'assurer que les nouvelles embauches servent une croissance déjà visible du carnet de commandes et surveiller l'impact sur le BFR si le CA augmente (plus de stocks, plus de créances).</p>
+</div>
+</div>
 </div>`,
  
 cas2: `<div class="cas-header">Cas pratique — Phase 2 · Diagnostic financier complet · Mécatech Industries (suite)</div>
@@ -248,157 +289,287 @@ cas2: `<div class="cas-header">Cas pratique — Phase 2 · Diagnostic financier 
 <p>Crée un fichier avec 2 onglets :</p>
 <ul>
   <li><span class="pill pill-blue">Onglet 1</span> <strong>Données brutes</strong> — Recopie le tableau ci-dessus</li>
-  <li><span class="pill pill-blue">Onglet 2</span> <strong>Ratios</strong> — Calcule les 8 ratios ci-dessous pour N-1 et N, puis calcule l'évolution en %</li>
+  <li><span class="pill pill-blue">Onglet 2</span> <strong>Ratios</strong> — Calcule les 8 ratios ci-dessous pour N-1 et N, puis calcule l'évolution</li>
 </ul>
  
-<h4>Étape 2 — Les 8 ratios à calculer (formules à trouver toi-même)</h4>
+<h4>Étape 2 — Les 8 ratios à calculer</h4>
 <table>
-  <tr><th>Ratio</th><th>Ce qu'il mesure</th><th>Résultat N-1</th><th>Résultat N</th><th>Évolution</th></tr>
-  <tr><td>Taux de marge brute</td><td>Efficacité commerciale</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
-  <tr><td>Taux de marge EBITDA</td><td>Rentabilité opérationnelle</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
-  <tr><td>Ratio de liquidité générale</td><td>Capacité à payer court terme</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
-  <tr><td>BFR en jours de CA</td><td>Poids du cycle d'exploitation</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
-  <tr><td>Levier financier (Dette nette / EBITDA)</td><td>Niveau d'endettement</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
-  <tr><td>ROE</td><td>Rentabilité des fonds propres</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
-  <tr><td>ROCE</td><td>Rentabilité du capital employé</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
-  <tr><td>Cash conversion (FCF / EBITDA)</td><td>Qualité des bénéfices</td><td>À calculer</td><td>À calculer</td><td>À calculer</td></tr>
+  <tr><th>Ratio</th><th>Ce qu'il mesure</th><th>N-1</th><th>N</th><th>Évolution</th></tr>
+  <tr><td>Taux de marge brute</td><td>Efficacité commerciale</td><td></td><td></td><td></td></tr>
+  <tr><td>Taux de marge EBITDA</td><td>Rentabilité opérationnelle</td><td></td><td></td><td></td></tr>
+  <tr><td>Ratio de liquidité générale</td><td>Capacité à payer court terme</td><td></td><td></td><td></td></tr>
+  <tr><td>BFR en jours de CA</td><td>Poids du cycle d'exploitation</td><td></td><td></td><td></td></tr>
+  <tr><td>Levier financier (Dette nette / EBITDA)</td><td>Niveau d'endettement</td><td></td><td></td><td></td></tr>
+  <tr><td>ROE</td><td>Rentabilité des fonds propres</td><td></td><td></td><td></td></tr>
+  <tr><td>ROCE</td><td>Rentabilité du capital employé</td><td></td><td></td><td></td></tr>
+  <tr><td>Cash conversion (FCF / EBITDA)</td><td>Qualité des bénéfices</td><td></td><td></td><td></td></tr>
 </table>
  
-<h4>Étape 3 — Rédige un diagnostic d'une demi-page</h4>
+<h4>Étape 3 — Diagnostic d'une demi-page</h4>
 <ul>
   <li>Structure : <strong>2 points forts · 2 points de vigilance · 1 conclusion</strong></li>
   <li>Chaque point doit s'appuyer sur un ratio calculé — pas d'affirmation sans chiffre</li>
-  <li>Réponds à la question : est-ce que Mécatech peut embaucher ET investir dans une nouvelle machine à 800 k€ cette année ?</li>
+  <li>Réponds à la question : Mécatech peut-elle embaucher ET investir dans une nouvelle machine à 800 k€ cette année ?</li>
 </ul>
-<div class="cas-warn">Envoie ton fichier Excel + ton diagnostic à Claude : "Corrige mon cas pratique Phase 2 — Mécatech"</div>
+<div class="cor-sep"></div>
+<button class="cor-btn" onclick="toggleCor('m2c')">🔓 Voir le corrigé (après avoir répondu)</button>
+<div class="cor-panel" id="cor-m2c">
+<div class="cor-header">✓ Corrigé — Phase 2 · Diagnostic Mécatech</div>
+<div class="cor-body">
+<div class="cor-spoiler">⚠️ Compare tes résultats ci-dessous. Une erreur de formule = 0 pts ; une erreur d'interprétation = points partiels.</div>
+<h4>Tableau des 8 ratios — résultats attendus</h4>
+<table>
+  <tr><th>Ratio</th><th>Formule</th><th>N-1</th><th>N</th><th>Signal</th></tr>
+  <tr><td>Marge brute</td><td>MB / CA</td><td>41,0 %</td><td>41,7 %</td><td class="cor-ok">✓ stable</td></tr>
+  <tr><td>Marge EBITDA</td><td>EBITDA / CA</td><td>11,9 %</td><td>12,9 %</td><td class="cor-ok">✓ +1 pt</td></tr>
+  <tr><td>Liquidité générale</td><td>AC / PC</td><td>2,87×</td><td>2,86×</td><td class="cor-ok">✓ solide</td></tr>
+  <tr><td>BFR jours</td><td>(Stocks+Créances−Fournis) / CA × 365</td><td>42,7 j</td><td>45,2 j</td><td class="cor-warn">⚠ +2,5 j</td></tr>
+  <tr><td>Levier DN/EBITDA</td><td>DN / EBITDA</td><td>0,70×</td><td>0,52×</td><td class="cor-ok">✓ −0,18×</td></tr>
+  <tr><td>ROE</td><td>RN / CP</td><td>18,9 %</td><td>20,5 %</td><td class="cor-ok">✓ +1,6 pt</td></tr>
+  <tr><td>ROCE</td><td>EBIT / Capital employé</td><td>22,3 %</td><td>25,4 %</td><td class="cor-ok">✓ +3,1 pt</td></tr>
+  <tr><td>Cash conversion</td><td>FCF / EBITDA</td><td>30,4 %</td><td>38,9 %</td><td class="cor-warn">⚠ faible</td></tr>
+</table>
+<h4>Diagnostic attendu</h4>
+<p><strong class="cor-ok">✅ Point fort 1 — Rentabilité en progression :</strong> ROCE passe de 22,3 % à 25,4 % (+3,1 pts) et marge EBITDA de 11,9 % à 12,9 % (+1 pt). L'entreprise devient plus efficace chaque année.</p>
+<p><strong class="cor-ok">✅ Point fort 2 — Désendettement rapide :</strong> levier DN/EBITDA de 0,70× à 0,52× en 1 an, alors que l'EBITDA monte. La dette baisse et la rentabilité monte simultanément.</p>
+<p><strong class="cor-warn">⚠ Vigilance 1 — BFR en tension légère :</strong> le BFR passe de 42,7 à 45,2 jours alors que le CA croît de 9,1 %. Si la tendance se poursuit, cela immobilisera du cash au fil de la croissance.</p>
+<p><strong class="cor-warn">⚠ Vigilance 2 — Cash conversion encore faible :</strong> seulement 39 % de l'EBITDA se convertit en free cash flow. Cela vient du capex et de la variation de BFR. À améliorer.</p>
+<p><strong>Conclusion :</strong> <span class="cor-ok">Oui, Mécatech peut embaucher ET acheter la machine.</span> FCF N = 2 100 k€ > 1 100 + 800 = 1 900 k€ de dépenses combinées. Condition : ne pas réaliser les deux simultanément en début d'exercice — étaler sur l'année pour préserver la trésorerie.</p>
+</div>
+</div>
 </div>`,
  
 cas3: `<div class="cas-header">Cas pratique — Phase 3 · Valorisation & stratégie · Mécatech Industries (conclusion)</div>
 <div class="cas-body">
-<div class="cas-note">Niveau : peu guidé · Excel requis · Large autonomie sur les choix d'hypothèses · Durée estimée : 5h</div>
+<div class="cas-note">Niveau : peu guidé · Excel requis · Large autonomie sur les hypothèses · Durée estimée : 5h</div>
  
 <h4>Contexte — décision stratégique</h4>
 <p>Tu connais maintenant bien Mécatech. Le directeur général te présente un projet : racheter un concurrent, <strong>Précimetal SAS</strong>, pour 4 500 k€. Pour financer cette acquisition, il envisage de contracter un emprunt bancaire supplémentaire de 3 500 k€ sur 5 ans à 4,5% de taux.</p>
 <p>Ta mission : évaluer si Mécatech est bien valorisée, si elle a la capacité financière de supporter cette dette, et formuler une recommandation argumentée.</p>
  
-<h4>Données complémentaires pour la valorisation</h4>
+<h4>Données complémentaires</h4>
 <table>
   <tr><th>Élément</th><th>Valeur</th></tr>
   <tr><td>Free Cash Flow année N</td><td>2 100 k€</td></tr>
-  <tr><td>Taux de croissance historique du CA (3 ans)</td><td>+5% / an</td></tr>
+  <tr><td>Taux de croissance historique du CA</td><td>+5 % / an (sur 3 ans)</td></tr>
   <tr><td>EBITDA année N</td><td>5 400 k€</td></tr>
-  <tr><td>Multiple EBITDA du secteur (comparables)</td><td>6x à 7x</td></tr>
+  <tr><td>Multiple EBITDA du secteur</td><td>6× à 7×</td></tr>
   <tr><td>Dette nette actuelle</td><td>2 800 k€</td></tr>
-  <tr><td>WACC à utiliser</td><td>8%</td></tr>
-  <tr><td>Taux de croissance perpétuelle (valeur terminale)</td><td>2%</td></tr>
+  <tr><td>WACC à utiliser</td><td>8 %</td></tr>
+  <tr><td>Taux de croissance perpétuelle</td><td>2 %</td></tr>
 </table>
  
-<h4>Ce que tu dois construire dans Excel (structure libre — c'est à toi de l'organiser)</h4>
+<h4>Ce que tu dois construire dans Excel</h4>
 <ul>
-  <li><span class="pill pill-purple">Partie 1</span> <strong>DCF</strong> — Projette les FCF sur 5 ans, calcule la valeur terminale, actualise tout, obtiens la valeur d'entreprise. Compare à la valeur par les multiples. Quelle est la fourchette de valorisation de Mécatech ?</li>
-  <li><span class="pill pill-purple">Partie 2</span> <strong>Capacité d'endettement</strong> — Si Mécatech contracte 3 500 k€ de dette supplémentaire, quel sera son nouveau ratio Dette nette / EBITDA ? Est-ce soutenable ? Quelle sera la charge annuelle d'intérêts et comment ça impacte le résultat net ?</li>
-  <li><span class="pill pill-purple">Partie 3</span> <strong>Analyse de sensibilité</strong> — Que se passe-t-il si la croissance tombe à 2% au lieu de 5% ? Et si l'EBITDA baisse de 15% suite à l'intégration du concurrent ? Montre 2 scénarios.</li>
+  <li><span class="pill pill-purple">Partie 1</span> <strong>DCF</strong> — Projette les FCF sur 5 ans, calcule la valeur terminale, actualise, obtiens l'EV. Compare à la valeur par les multiples.</li>
+  <li><span class="pill pill-purple">Partie 2</span> <strong>Capacité d'endettement</strong> — Après emprunt de 3 500 k€, quel est le nouveau levier DN/EBITDA ? Quelle est la charge annuelle d'intérêts ? Impact sur le RN ?</li>
+  <li><span class="pill pill-purple">Partie 3</span> <strong>Scénarios de stress</strong> — Que se passe-t-il si la croissance tombe à 2 % ? Et si l'EBITDA baisse de 15 % post-intégration ?</li>
 </ul>
  
 <h4>Livrable attendu — mémo d'une page</h4>
 <ul>
   <li><strong>Valorisation de Mécatech</strong> : fourchette DCF et multiples</li>
   <li><strong>Analyse de la capacité d'endettement</strong> : peut-elle absorber la dette ?</li>
-  <li><strong>Risques identifiés</strong> : 2 scénarios de stress</li>
+  <li><strong>Risques</strong> : 2 scénarios de stress chiffrés</li>
   <li><strong>Recommandation finale</strong> : oui ou non à l'acquisition, et à quelles conditions</li>
 </ul>
-<div class="cas-warn">Envoie ton Excel + mémo à Claude : "Corrige mon cas pratique Phase 3 — Mécatech acquisition"</div>
+<div class="cor-sep"></div>
+<button class="cor-btn" onclick="toggleCor('m3c')">🔓 Voir le corrigé (après avoir répondu)</button>
+<div class="cor-panel" id="cor-m3c">
+<div class="cor-header">✓ Corrigé — Phase 3 · Valorisation & acquisition Mécatech</div>
+<div class="cor-body">
+<div class="cor-spoiler">⚠️ Le corrigé présente une solution de référence. Tes hypothèses peuvent différer légèrement — l'important est la rigueur du raisonnement.</div>
+<h4>Partie 1 — DCF · Valorisation de Mécatech</h4>
+<table>
+  <tr><th>Année</th><th>FCF projeté (k€)</th><th>Facteur actualisation (8%)</th><th>VA (k€)</th></tr>
+  <tr><td>N+1</td><td>2 205</td><td>1/1,08 = 0,926</td><td>2 042</td></tr>
+  <tr><td>N+2</td><td>2 315</td><td>1/1,166 = 0,857</td><td>1 984</td></tr>
+  <tr><td>N+3</td><td>2 431</td><td>1/1,260 = 0,794</td><td>1 930</td></tr>
+  <tr><td>N+4</td><td>2 553</td><td>1/1,360 = 0,735</td><td>1 876</td></tr>
+  <tr><td>N+5</td><td>2 680</td><td>1/1,469 = 0,681</td><td>1 825</td></tr>
+  <tr><td colspan="3"><strong>Total VA des FCF</strong></td><td><strong>9 657</strong></td></tr>
+</table>
+<p>Valeur terminale = 2 680 × 1,02 / (0,08 − 0,02) = 2 734 / 0,06 = <strong>45 567 k€</strong></p>
+<p>VA valeur terminale = 45 567 / 1,469 = <strong>31 019 k€</strong></p>
+<p><strong class="cor-ok">EV (DCF) = 9 657 + 31 019 = 40 676 k€</strong> · Valeur fonds propres = 40 676 − 2 800 = <strong>37 876 k€</strong></p>
+<p>Fourchette multiples : EV = 5 400 × 6 = <strong>32 400 k€</strong> (bas) | 5 400 × 7 = <strong>37 800 k€</strong> (haut)</p>
+<p>→ Fourchette de valorisation : <strong class="cor-ok">32 400 — 40 676 k€ (EV)</strong></p>
+<h4>Partie 2 — Capacité d'endettement après acquisition</h4>
+<table>
+  <tr><th>Indicateur</th><th>Avant</th><th>Après (+3 500 k€ dette)</th><th>Signal</th></tr>
+  <tr><td>Dette nette (k€)</td><td>2 800</td><td>6 300</td><td>—</td></tr>
+  <tr><td>Levier DN/EBITDA</td><td>0,52×</td><td>1,17×</td><td class="cor-ok">✓ &lt; 2× zone verte</td></tr>
+  <tr><td>Intérêts annuels (k€)</td><td>480</td><td>480 + 158 = 638</td><td class="cor-ok">✓ absorbable</td></tr>
+  <tr><td>RN pro forma (k€)</td><td>2 340</td><td>~2 222</td><td class="cor-ok">✓ toujours positif</td></tr>
+</table>
+<p>Intérêts supplémentaires = 3 500 × 4,5 % = 157,5 k€/an → impact net impôt ≈ −118 k€ sur le RN. Très absorbable.</p>
+<h4>Partie 3 — Scénarios de stress</h4>
+<p><strong class="cor-warn">Stress 1 — Croissance 2 % au lieu de 5 % :</strong> FCF N+5 ≈ 2 316 k€, VT ≈ 39 372 k€, EV ≈ 36 000 k€ → toujours bien au-dessus du prix payé pour Précimetal. Acquisition toujours rentable.</p>
+<p><strong class="cor-warn">Stress 2 — EBITDA −15 % post-intégration :</strong> EBITDA = 5 400 × 0,85 = 4 590 k€ → levier = 6 300 / 4 590 = <strong>1,37×</strong> → toujours sain, pas d'alerte bancaire.</p>
+<h4>Recommandation</h4>
+<p><span class="cor-ok">✅ OUI à l'acquisition.</span> (1) Prix de 4 500 k€ est raisonnable vs fourchette multiples secteur. (2) Levier pro forma 1,17× reste très en-dessous des seuils bancaires (usuellement 3–4×). (3) Même dans les scénarios de stress, l'entreprise reste solvable. Conditions recommandées : apport fonds propres 1 000 k€ pour réduire l'emprunt à 2 500 k€ et sécuriser la trésorerie opérationnelle. Clause de sortie si EBITDA combiné < 4 000 k€ au bout de 2 ans.</p>
+</div>
+</div>
 </div>`,
  
-cas4: `<div class="cas-header">Cas pratique — Phase 4 · Diagnostic complet sur 3 entreprises réelles</div>
+cas4: `<div class="cas-header">Cas pratique — Phase 4 · Diagnostic sur 3 entreprises cotées réelles (2021–2023)</div>
 <div class="cas-body">
-<div class="cas-note">Niveau : guidé sur la navigation, autonome sur les calculs et interprétations · Excel requis · Durée estimée : 6–7h par entreprise · 3 entreprises = ~20h</div>
+<div class="cas-note">Niveau : autonomie totale · Excel requis · Données réelles fournies ici · Sources officielles liées · Durée estimée : 6–7h par entreprise</div>
  
-<h4>Les 3 entreprises — 3 situations radicalement différentes</h4>
+<h4>Les 3 entreprises — 3 profils financiers radicalement différents</h4>
 <table>
-  <tr><th>Entreprise</th><th>Ticker</th><th>Secteur</th><th>Profil financier</th></tr>
-  <tr><td><strong>Vicat</strong></td><td>VCT.PA</td><td>Matériaux / ciment</td><td class="signal-ok">Entreprise saine et rentable</td></tr>
-  <tr><td><strong>Sword Group</strong></td><td>SWP.PA</td><td>Services numériques</td><td class="signal-warn">Bonne apparence — signaux à creuser</td></tr>
-  <tr><td><strong>Clariane</strong></td><td>CLARI.PA</td><td>Maisons de retraite / santé</td><td class="signal-bad">Stress financier réel — restructuration en cours</td></tr>
+  <tr><th>Entreprise</th><th>Ticker</th><th>Secteur</th><th>Signal à détecter</th></tr>
+  <tr><td><strong>Vicat</strong></td><td>VCT.PA</td><td>Ciment / matériaux</td><td class="signal-ok">Entreprise saine — choc énergie 2022 puis rebond</td></tr>
+  <tr><td><strong>Sword Group</strong></td><td>SWP.PA</td><td>Services numériques (IT)</td><td class="signal-warn">Cession software 2022 gonfle les chiffres — creuser le BFR</td></tr>
+  <tr><td><strong>Clariane</strong></td><td>CLARI.PA</td><td>Maisons de retraite / santé</td><td class="signal-bad">Levier > 3,5× EBITDA — restructuration financière en cours</td></tr>
 </table>
  
-<h4>Comment naviguer sur Yahoo Finance — même méthode pour les 3 entreprises</h4>
+<h4>📋 Sources officielles — tous documents accessibles gratuitement</h4>
+<table>
+  <tr><th>Entreprise</th><th>Rapport / Document</th><th>Lien</th></tr>
+  <tr><td><strong>Vicat</strong></td><td>Communiqués résultats 2021-2023</td><td><a href="https://www.vicat.fr/investisseurs/communiques-presentations-financieres" target="_blank" style="color:#185FA5;font-size:11px">vicat.fr → Investisseurs → Communiqués →</a></td></tr>
+  <tr><td><strong>Vicat</strong></td><td>Document enregistrement universel (DEU)</td><td><a href="https://www.vicat.fr/investisseurs/documents-reglementaires" target="_blank" style="color:#185FA5;font-size:11px">vicat.fr → Documents réglementaires →</a></td></tr>
+  <tr><td><strong>Sword Group</strong></td><td>Rapports annuels &amp; résultats</td><td><a href="https://www.sword-group.com/fr/investisseurs/" target="_blank" style="color:#185FA5;font-size:11px">sword-group.com → Investisseurs →</a></td></tr>
+  <tr><td><strong>Clariane</strong></td><td>Résultats annuels 2021-2023</td><td><a href="https://www.clariane.com/espace-investisseurs/resultats-financiers" target="_blank" style="color:#185FA5;font-size:11px">clariane.com → Espace investisseurs →</a></td></tr>
+  <tr><td><strong>Clariane</strong></td><td>Document universel d'enregistrement</td><td><a href="https://www.clariane.com/espace-investisseurs/rapports-annuels" target="_blank" style="color:#185FA5;font-size:11px">clariane.com → Rapports annuels →</a></td></tr>
+</table>
+ 
+<div class="cas-note">Toutes les données P&amp;L ci-dessous sont tirées des communiqués de presse officiels (sources vérifiées). Les données de bilan marquées (*) sont estimées à partir des ratios publiés — pour les chiffres exacts, consulter les liens ci-dessus.</div>
+ 
+<h4>📊 VICAT — Données pré-remplies (en M€) · Source : vicat.fr</h4>
+<table>
+  <tr><th>Indicateur</th><th>2021</th><th>2022</th><th>2023</th></tr>
+  <tr><td>Chiffre d'affaires</td><td>3 122</td><td>3 642</td><td>3 937</td></tr>
+  <tr><td>EBITDA</td><td>618</td><td>570</td><td>740</td></tr>
+  <tr><td>Marge EBITDA</td><td>19,8 %</td><td>15,6 %</td><td>18,8 %</td></tr>
+  <tr><td>EBIT</td><td>336</td><td>~255 *</td><td>~420 *</td></tr>
+  <tr><td>Résultat net part groupe</td><td>204</td><td>156</td><td>258</td></tr>
+  <tr><td>Charges financières nettes</td><td>~30</td><td>~40 *</td><td>~45 *</td></tr>
+  <tr><td>Capitaux propres</td><td>2 606</td><td>~2 650 *</td><td>~2 850 *</td></tr>
+  <tr><td>Dette nette</td><td>1 318</td><td>~1 500 *</td><td>~1 250 *</td></tr>
+  <tr><td>Capex estimé (10% CA)</td><td>~315</td><td>~390 *</td><td>~370 *</td></tr>
+  <tr><td>Free Cash Flow estimé</td><td>~140</td><td>~50 *</td><td>~310 *</td></tr>
+  <tr><td>Levier (DN/EBITDA)</td><td>2,1×</td><td>~2,6× *</td><td>~1,7× *</td></tr>
+</table>
+ 
+<h4>📊 SWORD GROUP — Données pré-remplies (en k€) · Source : rapports annuels SWP</h4>
+<table>
+  <tr><th>Indicateur</th><th>2021</th><th>2022</th><th>2023</th></tr>
+  <tr><td>Chiffre d'affaires</td><td>214 564</td><td>272 257</td><td>288 128</td></tr>
+  <tr><td>EBITDA (estimé — marge publiée)</td><td>~32 185</td><td>~36 750</td><td>~34 575</td></tr>
+  <tr><td>Marge EBITDA</td><td>15,0 %</td><td>13,5 %</td><td>12,0 %</td></tr>
+  <tr><td>Résultat opérationnel</td><td>19 145</td><td>117 561 ⚠</td><td>21 801</td></tr>
+  <tr><td>Résultat net part groupe</td><td>17 653</td><td>109 755 ⚠</td><td>22 822</td></tr>
+  <tr><td>Capitaux propres</td><td>94 328</td><td>101 544</td><td>105 410</td></tr>
+  <tr><td>Trésorerie</td><td>55 295</td><td>57 138</td><td>62 587</td></tr>
+  <tr><td>Dettes financières totales</td><td>9 282</td><td>31 234</td><td>47 444</td></tr>
+  <tr><td>Dette nette (négatif = tréso nette)</td><td>−46 013</td><td>−25 904</td><td>−15 143</td></tr>
+  <tr><td>Stocks + travaux en cours</td><td>21 727</td><td>35 627</td><td>45 413</td></tr>
+  <tr><td>Créances clients</td><td>32 415</td><td>32 173</td><td>35 700</td></tr>
+  <tr><td>Free Cash Flow (estimé)</td><td>~12 000</td><td>~18 000</td><td>~10 000</td></tr>
+</table>
+<div class="cas-warn">⚠ 2022 : le résultat net de 109 M€ est <strong>artificiel</strong>. Il inclut ~95 M€ de gain sur la cession de Sword GRC (division logiciel vendue). Sans cette plus-value, le RN récurrent serait ~15 M€. Dividende exceptionnel de 10€/action distribué suite à cette cession.</div>
+ 
+<h4>📊 CLARIANE (ex-Korian) — Données pré-remplies (en M€) · Source : clariane.com</h4>
+<table>
+  <tr><th>Indicateur</th><th>2021</th><th>2022</th><th>2023</th></tr>
+  <tr><td>Chiffre d'affaires</td><td>4 310</td><td>4 534</td><td>5 053</td></tr>
+  <tr><td>EBITDA hors IFRS16</td><td>597</td><td>607</td><td>614</td></tr>
+  <tr><td>Marge EBITDA hors IFRS16</td><td>13,9 %</td><td>13,4 %</td><td>12,1 %</td></tr>
+  <tr><td>EBIT (hors IFRS16)</td><td>~345</td><td>~317</td><td>~280 *</td></tr>
+  <tr><td>Résultat net part groupe</td><td>94,6</td><td>66,9</td><td>−63</td></tr>
+  <tr><td>Charges financières nettes</td><td>~75</td><td>~80 *</td><td>~90 *</td></tr>
+  <tr><td>Dette nette (hors IFRS16)</td><td>~2 090 *</td><td>~2 246</td><td>~2 333</td></tr>
+  <tr><td>Levier (DN/EBITDA)</td><td>~3,5×</td><td>3,7×</td><td>3,8×</td></tr>
+  <tr><td>Cash flow libre opérationnel</td><td>230</td><td>371</td><td>~288 *</td></tr>
+  <tr><td>Portefeuille immobilier (valeur)</td><td>3 200</td><td>3 500</td><td>~3 000 *</td></tr>
+</table>
+<div class="cas-danger">Clariane 2023 : perte nette de 63 M€ malgré un CA en hausse de +11,4 %. La marge EBITDA se comprime chaque année (13,9 % → 12,1 %). Plan de cession d'actifs en cours (vente UK : 243 M€). Levier à 3,8× et en hausse → situation de stress réelle.</div>
+ 
+<h4>Étape 1 — Les 8 ratios à calculer (sur 3 ans pour chaque entreprise)</h4>
+<table>
+  <tr><th>Ratio</th><th>Formule</th><th>N-2 (2021)</th><th>N-1 (2022)</th><th>N (2023)</th><th>Tendance</th></tr>
+  <tr><td>Taux de marge brute</td><td>Marge brute / CA</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Taux de marge EBITDA</td><td>EBITDA / CA</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Liquidité générale</td><td>Actif cour. / Passif cour.</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>BFR en jours de CA</td><td>(Stocks+Créances−Fournis) / CA × 365</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Levier (DN / EBITDA)</td><td>DN / EBITDA</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>ROE</td><td>RN / Capitaux propres</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>ROCE</td><td>EBIT / Capital employé</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Cash conversion</td><td>FCF / EBITDA</td><td></td><td></td><td></td><td></td></tr>
+</table>
+ 
+<h4>Étape 2 — DCF simplifié (structure libre, même méthode que Phase 3)</h4>
 <ul>
-  <li>Va sur <strong>fr.finance.yahoo.com</strong> → tape le ticker dans la barre de recherche → appuie sur Entrée</li>
-  <li>Dans le menu horizontal sous le nom de l'entreprise, clique sur <strong>Financials</strong></li>
-  <li>Tu vois 3 onglets : <strong>Income Statement</strong> (compte de résultat) · <strong>Balance Sheet</strong> (bilan) · <strong>Cash Flow Statement</strong> (flux de trésorerie)</li>
-  <li>Par défaut les données sont affichées en <strong>annuel</strong> — assure-toi que "Annual" est sélectionné (pas "Quarterly")</li>
-  <li>Yahoo affiche <strong>4 années</strong> côte à côte — prends les <strong>3 dernières</strong></li>
-  <li>Les chiffres sont en milliers (k) ou millions (M) selon les entreprises — <strong>vérifie l'unité indiquée en haut du tableau</strong> avant de recopier</li>
+  <li>Utilise le FCF de 2023 comme point de départ</li>
+  <li>WACC : <strong>8 %</strong> pour Vicat et Sword, <strong>10 %</strong> pour Clariane (prime de risque)</li>
+  <li>Croissance perpétuelle : <strong>2 %</strong> pour les 3</li>
+  <li>Compare ta valeur d'entreprise (EV) au dernier cours boursier × nombre d'actions (capitalisation boursière visible sur <a href="https://fr.finance.yahoo.com" target="_blank" style="color:#185FA5">Yahoo Finance</a>)</li>
 </ul>
  
-<h4>Tableau Excel à construire — structure identique pour les 3 entreprises</h4>
-<p>Crée un fichier Excel par entreprise avec 3 onglets. Les noms de lignes ci-dessous correspondent exactement aux libellés que tu verras sur Yahoo Finance.</p>
- 
-<h4>Onglet 1 — Données brutes (à remplir avec les chiffres Yahoo Finance)</h4>
+<h4>Questions directrices par entreprise</h4>
 <table>
-  <tr><th>Ligne à récupérer</th><th>Onglet Yahoo Finance</th><th>Année N-2</th><th>Année N-1</th><th>Année N</th></tr>
-  <tr><td>Total Revenue</td><td>Income Statement</td><td></td><td></td><td></td></tr>
-  <tr><td>Gross Profit</td><td>Income Statement</td><td></td><td></td><td></td></tr>
-  <tr><td>EBITDA</td><td>Income Statement</td><td></td><td></td><td></td></tr>
-  <tr><td>Operating Income (EBIT)</td><td>Income Statement</td><td></td><td></td><td></td></tr>
-  <tr><td>Net Income</td><td>Income Statement</td><td></td><td></td><td></td></tr>
-  <tr><td>Interest Expense</td><td>Income Statement</td><td></td><td></td><td></td></tr>
-  <tr><td>Total Assets</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
-  <tr><td>Total Stockholders Equity</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
-  <tr><td>Total Debt</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
-  <tr><td>Current Assets</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
-  <tr><td>Current Liabilities</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
-  <tr><td>Inventory</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
-  <tr><td>Accounts Receivable</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
-  <tr><td>Accounts Payable</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
-  <tr><td>Cash And Cash Equivalents</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
-  <tr><td>Free Cash Flow</td><td>Cash Flow Statement</td><td></td><td></td><td></td></tr>
-  <tr><td>Capital Expenditure</td><td>Cash Flow Statement</td><td></td><td></td><td></td></tr>
+  <tr><th>Entreprise</th><th>Questions spécifiques</th></tr>
+  <tr><td><strong>Vicat</strong></td><td>Comment expliquer la chute de marge en 2022 puis le rebond en 2023 ? Le capex (~10% CA) est-il cohérent pour un cimentier ? La dette nette est-elle bien couverte par le FCF (ratio DN/FCF) ? Y a-t-il un signal de ralentissement de la croissance ?</td></tr>
+  <tr><td><strong>Sword</strong></td><td>Le RN 2022 est-il représentatif de la rentabilité ? La marge EBITDA se comprime — pourquoi (cession du logiciel ?) ? Les stocks (+109 % sur 2 ans) augmentent-ils plus vite que le CA (+34 %) — qu'est-ce que ça signifie ? La trésorerie nette est-elle un signal rassurant ou un leurre ?</td></tr>
+  <tr><td><strong>Clariane</strong></td><td>Le levier 3,8× est-il soutenable ? Les charges financières représentent quel % de l'EBIT ? Le cash flow libre opérationnel suffit-il à financer le remboursement de la dette ? Si tu étais DAF, quelles seraient tes 3 priorités immédiates ?</td></tr>
 </table>
- 
-<h4>Onglet 2 — Les 8 ratios (formules à trouver toi-même, calculer sur les 3 ans)</h4>
-<table>
-  <tr><th>Ratio</th><th>Ce qu'il mesure</th><th>N-2</th><th>N-1</th><th>N</th><th>Tendance</th></tr>
-  <tr><td>Taux de marge brute</td><td>Efficacité commerciale</td><td></td><td></td><td></td><td></td></tr>
-  <tr><td>Taux de marge EBITDA</td><td>Rentabilité opérationnelle</td><td></td><td></td><td></td><td></td></tr>
-  <tr><td>Ratio de liquidité générale</td><td>Capacité à payer court terme</td><td></td><td></td><td></td><td></td></tr>
-  <tr><td>BFR en jours de CA</td><td>Poids du cycle d'exploitation</td><td></td><td></td><td></td><td></td></tr>
-  <tr><td>Levier (Dette nette / EBITDA)</td><td>Niveau d'endettement</td><td></td><td></td><td></td><td></td></tr>
-  <tr><td>ROE</td><td>Rentabilité des fonds propres</td><td></td><td></td><td></td><td></td></tr>
-  <tr><td>ROCE</td><td>Rentabilité du capital employé</td><td></td><td></td><td></td><td></td></tr>
-  <tr><td>Cash conversion (FCF / EBITDA)</td><td>Qualité des bénéfices</td><td></td><td></td><td></td><td></td></tr>
-</table>
- 
-<h4>Onglet 3 — DCF simplifié (structure libre — même méthode que Phase 3)</h4>
-<ul>
-  <li>FCF de base = Free Cash Flow de l'année N récupéré sur Yahoo Finance</li>
-  <li>Projette sur 5 ans avec le taux de croissance historique du CA comme hypothèse</li>
-  <li>WACC : utilise <strong>8%</strong> pour Vicat et Sword, <strong>10%</strong> pour Clariane (prime de risque supplémentaire)</li>
-  <li>Croissance perpétuelle : <strong>2%</strong> pour les 3</li>
-  <li>Compare ta valeur d'entreprise obtenue à la <strong>capitalisation boursière</strong> visible sur la page principale Yahoo Finance</li>
-</ul>
- 
-<h4>Questions directrices par entreprise — à répondre dans ton mémo</h4>
-<table>
-  <tr><th>Entreprise</th><th>Questions spécifiques à traiter</th></tr>
-  <tr><td><strong>Vicat</strong></td><td>La rentabilité est-elle stable ou en progression sur 3 ans ? Le Capital Expenditure (capex) représente quel % du CA — est-ce cohérent avec une industrie lourde ? La dette nette est-elle bien couverte par le FCF ? Y a-t-il des signaux que la croissance future pourrait ralentir ?</td></tr>
-  <tr><td><strong>Sword Group</strong></td><td>Le CA croît — est-ce que le FCF croît dans les mêmes proportions ? La marge EBITDA est-elle stable sur 3 ans ou se comprime-t-elle ? Le BFR augmente-t-il plus vite que le CA (signal d'alerte) ? Qu'est-ce que ça dit sur la qualité de la croissance ?</td></tr>
-  <tr><td><strong>Clariane</strong></td><td>Quel est le ratio Dette nette / EBITDA — est-il soutenable ? Les charges financières (Interest Expense) représentent quel % de l'EBIT — l'entreprise peut-elle servir sa dette ? Le FCF est-il positif ou négatif ? Si tu étais DAF, quelles seraient tes 3 priorités immédiates pour stabiliser la situation ?</td></tr>
-</table>
- 
-<div class="cas-danger">Pour Clariane : les chiffres sont en milliards d'euros. Le levier dépasse 4x l'EBITDA — c'est une situation de stress réelle. Ne te contente pas de constater, formule une recommandation concrète de restructuration financière.</div>
  
 <h4>Mémo d'une page — structure attendue (identique pour les 3)</h4>
 <ul>
-  <li><strong>1. Contexte</strong> (3 lignes) — secteur, taille, positionnement</li>
-  <li><strong>2. Points forts</strong> (2–3 bullets avec chiffres)</li>
-  <li><strong>3. Points de vigilance</strong> (2–3 bullets avec chiffres)</li>
-  <li><strong>4. Valorisation</strong> (2 lignes) — DCF vs capitalisation boursière</li>
-  <li><strong>5. Recommandation</strong> (1 phrase) — priorité absolue si tu es le conseiller DAF</li>
+  <li><strong>1. Contexte</strong> — secteur, taille, positionnement</li>
+  <li><strong>2. Points forts</strong> — 2–3 bullets avec chiffres</li>
+  <li><strong>3. Points de vigilance</strong> — 2–3 bullets avec chiffres</li>
+  <li><strong>4. Valorisation</strong> — EV DCF vs capitalisation boursière</li>
+  <li><strong>5. Recommandation</strong> — priorité absolue si tu es le conseiller DAF</li>
 </ul>
  
-<div class="cas-warn">Envoie ton Excel + mémo à Claude entreprise par entreprise : "Corrige mon cas pratique Phase 4 — Vicat" puis Sword puis Clariane. Un par un pour un retour détaillé sur chaque.</div>
+<div class="cor-sep"></div>
+<button class="cor-btn" onclick="toggleCor('m4c')">🔓 Voir le corrigé (après avoir répondu)</button>
+<div class="cor-panel" id="cor-m4c">
+<div class="cor-header">✓ Corrigé — Phase 4 · Les 3 entreprises réelles</div>
+<div class="cor-body">
+<div class="cor-spoiler">⚠️ Données issues des communiqués officiels (2021–2023). Certains ratios peuvent varier légèrement selon les hypothèses retenues pour les données (*estimées).</div>
+ 
+<h4>VICAT — Analyse</h4>
+<table>
+  <tr><th>Ratio</th><th>2021</th><th>2022</th><th>2023</th><th>Lecture</th></tr>
+  <tr><td>Marge EBITDA</td><td>19,8 %</td><td>15,6 %</td><td>18,8 %</td><td class="cor-warn">⚠ Choc énergie 2022 puis rebond</td></tr>
+  <tr><td>Levier DN/EBITDA</td><td>2,1×</td><td>~2,6×</td><td>~1,7×</td><td class="cor-ok">✓ Solide, en réduction</td></tr>
+  <tr><td>Marge nette</td><td>6,5 %</td><td>4,3 %</td><td>6,6 %</td><td class="cor-ok">✓ Rebond fort en 2023</td></tr>
+  <tr><td>Capex / CA</td><td>~10 %</td><td>~11 %</td><td>~9 %</td><td class="cor-ok">✓ Normal cimentier (8–12 %)</td></tr>
+</table>
+<p><strong>Diagnostic Vicat :</strong> Entreprise cyclique mais saine. La crise énergétique 2022 a comprimé les marges (−4 pts EBITDA) avant un rebond fort en 2023. Le levier financier reste sous 3× en toute circonstance = structure solide. Le capex élevé (~10 % CA) est structurel dans le secteur du ciment et correspond à l'investissement dans l'usine Ragland (USA). <span class="cor-ok">Signal principal : rentabilité résiliente avec désendettement progressif.</span> Risque : exposition géopolitique (Turquie, Égypte = devises volatiles) et sensibilité aux coûts énergétiques.</p>
+<p><strong>DCF orientatif Vicat (FCF 2023 ~310 M€, WACC 8 %, g=2 %) :</strong> EV ≈ 310 × 1,02 / (0,08−0,02) × [1/(1,08)^5 facteurs inclus] ≈ 4 500–5 500 M€. À comparer à la capitalisation boursière effective pour évaluer la décote/prime de marché.</p>
+ 
+<h4>SWORD GROUP — Analyse</h4>
+<table>
+  <tr><th>Ratio</th><th>2021</th><th>2022</th><th>2023</th><th>Lecture</th></tr>
+  <tr><td>Marge EBITDA</td><td>15,0 %</td><td>13,5 %</td><td>12,0 %</td><td class="cor-warn">⚠ Compression post-cession GRC</td></tr>
+  <tr><td>RN "réel" récurrent</td><td>~17,7 M€</td><td>~15 M€ *</td><td>~22,8 M€</td><td class="cor-warn">⚠ 2022 gonflé par +95 M€ cession</td></tr>
+  <tr><td>Stocks / CA</td><td>10,1 %</td><td>13,1 %</td><td>15,8 %</td><td class="cor-bad">🔴 BFR en dégradation rapide</td></tr>
+  <tr><td>Dette nette</td><td>−46 M€</td><td>−26 M€</td><td>−15 M€</td><td class="cor-ok">✓ Toujours tréso nette positive</td></tr>
+</table>
+<p><strong>Signal principal Sword :</strong> L'entreprise croît (+34 % CA sur 2 ans) mais le BFR se détériore structurellement. Les stocks passent de 21,7 M€ à 45,4 M€ (+109 %) alors que le CA n'augmente que de +34 %. Cela signifie que la croissance est de moins en moins efficace en termes de cash — les projets démarrent mais ne facturent pas encore. La marge EBITDA est en compression régulière (15 % → 12 %) : le business de services est moins rentable que le logiciel cédé en 2022. <span class="cor-warn">Recommandation DAF : surveiller le BFR et la conversion cash ; exiger des KPIs mensuels sur les délais de facturation et l'avancement des projets.</span></p>
+ 
+<h4>CLARIANE — Analyse</h4>
+<table>
+  <tr><th>Ratio</th><th>2021</th><th>2022</th><th>2023</th><th>Lecture</th></tr>
+  <tr><td>Marge EBITDA</td><td>13,9 %</td><td>13,4 %</td><td>12,1 %</td><td class="cor-bad">🔴 Compression continue</td></tr>
+  <tr><td>Levier DN/EBITDA</td><td>~3,5×</td><td>3,7×</td><td>3,8×</td><td class="cor-bad">🔴 Tendance haussière</td></tr>
+  <tr><td>Résultat net</td><td>+94,6 M€</td><td>+66,9 M€</td><td>−63 M€</td><td class="cor-bad">🔴 Perte 2023</td></tr>
+  <tr><td>Charges fin. / EBIT</td><td>~22 %</td><td>~25 %</td><td>~32 %</td><td class="cor-bad">🔴 Poids de la dette croissant</td></tr>
+</table>
+<p><strong>Diagnostic Clariane :</strong> Le CA croît fortement (+17 % sur 3 ans) mais toute la croissance est absorbée par l'inflation des coûts salariaux et des loyers, comprimant l'EBITDA. La dette nette de ~2,3 Md€ à 3,8× EBITDA approche les limites des covenants bancaires (généralement fixés à 4–4,5×). La perte nette 2023 (−63 M€) traduit des dépréciations d'actifs (UK, Pays-Bas, Italie, Espagne).</p>
+<p><strong class="cor-bad">3 priorités DAF pour Clariane :</strong></p>
+<ul>
+  <li>1. <strong>Réduire le levier sous 3×</strong> via les cessions d'actifs déjà engagées (UK vendu 243 M€) → ramener DN à ~1,8 Md€</li>
+  <li>2. <strong>Améliorer les marges</strong> en renégociant les tarifs avec les autorités publiques (financement EHPAD) et en réduisant les coûts opérationnels par mutualisation</li>
+  <li>3. <strong>Sécuriser le refinancement</strong> de la dette avant les échéances — la ligne avec Crédit Agricole (actionnaire principal) est clé</li>
+</ul>
+<p><strong>DCF Clariane (WACC 10 %, g=2 %) :</strong> Avec FCF ~288 M€ en 2023, EV ≈ 2 500–3 000 M€. Valeur fonds propres = EV − dette nette ≈ 200–700 M€. À mettre en regard de la capitalisation boursière effective (très dépréciée par le marché).</p>
+</div>
+</div>
 </div>`
  
 };
@@ -420,7 +591,7 @@ const PHASES=[
     {id:'m4',name:'Financement d\'entreprise — les bases',desc:'Dettes, fonds propres, types de financements, logique bancaire. Plateforme gratuite créée par des diplômés HEC, utilisée par des profils recrutés chez KPMG, Deloitte et BNP.',time:'10h',type:'Cours vidéo + quiz',lang:'Français',
      links:[{url:'https://www.trainy.co',label:'Trainy.co — Finance & conseil (gratuit, créé par HEC) →'}],
      note:'Sélectionne les modules "Finance d\'entreprise" et "Financement" dans le menu.'},
-    {id:'m1c',name:'Cas pratique — Phase 1',desc:'Lecture et interprétation des états financiers de Mécatech Industries. Pas d\'Excel, pas de calcul complexe — juste comprendre ce que les chiffres racontent.',time:'2h',type:'Cas guidé',lang:'Français',cas:'cas1',
+    {id:'m1c',name:'Cas pratique — Phase 1',desc:'Lecture et interprétation des états financiers de Mécatech Industries. Pas d\'Excel, pas de calcul complexe — juste comprendre ce que les chiffres racontent.',time:'2h',type:'Cas guidé · Corrigé inclus',lang:'Français',cas:'cas1',
      links:[]},
   ]},
   {id:'p2',color:'#185FA5',colorLight:'#E6F1FB',colorText:'#0C447C',
@@ -437,7 +608,7 @@ const PHASES=[
      links:[{url:'https://www.coursera.org/specializations/business-financial-modeling',label:'Coursera Wharton — Financial Modeling (audit gratuit) →'}]},
     {id:'m8',name:'Tableaux de bord & reporting financier',desc:'Construire des dashboards de pilotage (KPIs, cash, résultat). Outil de communication principal du DAF externe.',time:'10h',type:'Tutoriels pratiques',lang:'Français',
      links:[{url:'https://openclassrooms.com/fr/courses/4525361-realisez-des-dashboards-avec-power-bi',label:'OpenClassrooms — Dashboards Power BI →'}]},
-    {id:'m2c',name:'Cas pratique — Phase 2',desc:'Diagnostic financier complet sur Mécatech : tu construis le tableau des 8 ratios dans Excel sur 2 ans, tu identifies les tendances et tu formules un diagnostic structuré.',time:'4h',type:'Cas semi-guidé · Excel',lang:'Français',cas:'cas2',
+    {id:'m2c',name:'Cas pratique — Phase 2',desc:'Diagnostic financier complet sur Mécatech : tu construis le tableau des 8 ratios dans Excel sur 2 ans, tu identifies les tendances et tu formules un diagnostic structuré.',time:'4h',type:'Cas semi-guidé · Excel · Corrigé inclus',lang:'Français',cas:'cas2',
      links:[]},
   ]},
   {id:'p3',color:'#7F77DD',colorLight:'#EEEDFE',colorText:'#3C3489',
@@ -451,14 +622,18 @@ const PHASES=[
      links:[{url:'https://www.coursera.org/learn/corporate-strategy',label:'Coursera HEC — Strategy (audit gratuit) →'}]},
     {id:'m12',name:'Plan de financement & business plan',desc:'Construire un plan de financement à 3 ans, structurer un business plan. Mission récurrente du DAF externe.',time:'10h',type:'Cours vidéo + guides',lang:'Français',
      links:[{url:'https://www.bpifrance-universite.fr/',label:'BPIFrance Université — formations gratuites →'}]},
-    {id:'m3c',name:'Cas pratique — Phase 3',desc:'Valorisation et décision stratégique sur Mécatech : DCF, analyse de la capacité d\'endettement pour une acquisition, 2 scénarios de stress. Structure libre, mémo de recommandation.',time:'5h',type:'Cas peu guidé · Excel libre',lang:'Français',cas:'cas3',
+    {id:'m3c',name:'Cas pratique — Phase 3',desc:'Valorisation et décision stratégique sur Mécatech : DCF, analyse de la capacité d\'endettement pour une acquisition, 2 scénarios de stress. Structure libre, mémo de recommandation.',time:'5h',type:'Cas peu guidé · Excel libre · Corrigé inclus',lang:'Français',cas:'cas3',
      links:[]},
   ]},
   {id:'p4',color:'#BA7517',colorLight:'#FAEEDA',colorText:'#633806',
-   title:'Phase 4 — Pratique & posture conseil',sub:'Cas réels guidés · Veille · Entretiens',badge:'Semaines 15–20',prereq:'Prérequis : Phases 1–3 validées',
+   title:'Phase 4 — Pratique & posture conseil',sub:'Cas réels · Véritables chiffres · Corrigés inclus',badge:'Semaines 15–20',prereq:'Prérequis : Phases 1–3 validées',
    modules:[
-    {id:'m4c',name:'Cas pratique — Phase 4 · 3 entreprises réelles',desc:'Vicat (saine) · Sword Group (signaux à creuser) · Clariane (stress financier réel). Autonomie totale — même niveau qu\'un analyste junior en cabinet.',time:'20h',type:'Cas autonomie totale · Excel',lang:'Français',cas:'cas4',
-     links:[{url:'https://fr.finance.yahoo.com',label:'Yahoo Finance — données gratuites →'}]},
+    {id:'m4c',name:'Cas pratique — Phase 4 · 3 entreprises réelles (2021–2023)',desc:'Vicat · Sword Group · Clariane — données réelles pré-remplies, liens rapports annuels, corrigé complet. Même niveau qu\'un analyste junior en cabinet.',time:'20h',type:'Cas autonomie totale · Données réelles · Corrigé inclus',lang:'Français',cas:'cas4',
+     links:[
+       {url:'https://www.vicat.fr/investisseurs/communiques-presentations-financieres',label:'Vicat — Communiqués & présentations financières →'},
+       {url:'https://www.sword-group.com/fr/investisseurs/',label:'Sword Group — Espace investisseurs →'},
+       {url:'https://www.clariane.com/espace-investisseurs/resultats-financiers',label:'Clariane — Résultats financiers →'},
+     ]},
     {id:'m14',name:'Veille économique hebdomadaire',desc:'15 articles gratuits/mois avec un compte HBR gratuit. Créer un compte sur hbr.org → "Sign up". Compléter avec Les Échos (5 articles gratuits/jour).',time:'Continu',type:'Veille',lang:'Français/Anglais',
      links:[
        {url:'https://hbr.org/topic/subject/finance',label:'HBR — Finance (compte gratuit requis) →'},
@@ -511,6 +686,10 @@ function togglePhase(id){
   const o=b.classList.contains('open');b.classList.toggle('open',!o);c.classList.toggle('open',!o);
 }
 function toggleCas(id){document.getElementById('cas-'+id).classList.toggle('open');}
+function toggleCor(id){
+  const el=document.getElementById('cor-'+id);
+  if(el)el.classList.toggle('open');
+}
 function resetAll(){
   if(!confirm('Réinitialiser toute la progression ?'))return;
   Object.keys(state).forEach(k=>delete state[k]);scheduleSave();
@@ -519,7 +698,7 @@ function resetAll(){
 function renderLinks(links,note){
   if(!links||links.length===0)return note?`<div class="mod-note">${note}</div>`:'';
   let h='<div class="mod-links">';
-  links.forEach(l=>{h+=`<a class="mod-link" href="${l.url}" target="_blank">${l.label}</a>`});
+  links.forEach(l=>{h+=`<a class="mod-link" href="${l.url}" target="_blank">${l.label}</a>`;});
   if(note)h+=`<div class="mod-note">${note}</div>`;
   return h+'</div>';
 }
