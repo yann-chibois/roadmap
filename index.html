@@ -123,23 +123,16 @@ h1{font-size:22px;font-weight:600;margin-bottom:4px}
  
 <script>
 const API_KEY='$2a$10$5M9.tjyDJ2OTKuK11Cy5s.NNJVRhTsWTdX.49MXhTKCdCjBpaSZtO';
-const BIN_NAME='roadmap-yann';
-let BIN_ID=localStorage.getItem('jsonbin_id')||null;
+const BIN_ID='69b3e3c7c3097a1dd5203192';
 let saveTimer=null;
 let state={};
  
 async function loadFromCloud(){
   setStatus('loading');
   try{
-    if(!BIN_ID){
-      const local=localStorage.getItem('roadmap_daf_v5');
-      if(local)state=JSON.parse(local);
-      await createBin();
-    }else{
-      const res=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`,{headers:{'X-Master-Key':API_KEY}});
-      const data=await res.json();
-      state=data.record||{};
-    }
+    const res=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`,{headers:{'X-Master-Key':API_KEY}});
+    const data=await res.json();
+    state=data.record||{};
     setStatus('ok');render();updateStats();
   }catch(e){
     const local=localStorage.getItem('roadmap_daf_v5');
@@ -147,16 +140,9 @@ async function loadFromCloud(){
     setStatus('error');render();updateStats();
   }
 }
-async function createBin(){
-  const res=await fetch('https://api.jsonbin.io/v3/b',{method:'POST',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY,'X-Bin-Name':BIN_NAME,'X-Bin-Private':'true'},body:JSON.stringify(state)});
-  const data=await res.json();
-  BIN_ID=data.metadata.id;
-  localStorage.setItem('jsonbin_id',BIN_ID);
-}
 async function saveToCloud(){
   setStatus('saving');
   try{
-    if(!BIN_ID)await createBin();
     await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(state)});
     localStorage.setItem('roadmap_daf_v5',JSON.stringify(state));
     setStatus('ok');
