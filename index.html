@@ -310,9 +310,9 @@ cas3: `<div class="cas-header">Cas pratique — Phase 3 · Valorisation & strat�
 <div class="cas-warn">Envoie ton Excel + mémo à Claude : "Corrige mon cas pratique Phase 3 — Mécatech acquisition"</div>
 </div>`,
  
-cas4: `<div class="cas-header">Cas pratique — Phase 4 · Diagnostic complet sur 3 entreprises réelles · Autonomie totale</div>
+cas4: `<div class="cas-header">Cas pratique — Phase 4 · Diagnostic complet sur 3 entreprises réelles</div>
 <div class="cas-body">
-<div class="cas-note">Niveau : autonomie totale · Excel requis · Même niveau qu'un analyste junior en cabinet · Durée estimée : 6–7h par entreprise · 3 entreprises = ~20h</div>
+<div class="cas-note">Niveau : guidé sur la navigation, autonome sur les calculs et interprétations · Excel requis · Durée estimée : 6–7h par entreprise · 3 entreprises = ~20h</div>
  
 <h4>Les 3 entreprises — 3 situations radicalement différentes</h4>
 <table>
@@ -322,33 +322,83 @@ cas4: `<div class="cas-header">Cas pratique — Phase 4 · Diagnostic complet su
   <tr><td><strong>Clariane</strong></td><td>CLARI.PA</td><td>Maisons de retraite / santé</td><td class="signal-bad">Stress financier réel — restructuration en cours</td></tr>
 </table>
  
-<h4>Comment accéder aux données</h4>
+<h4>Comment naviguer sur Yahoo Finance — même méthode pour les 3 entreprises</h4>
 <ul>
-  <li>Va sur <strong>fr.finance.yahoo.com</strong> → tape le ticker → clique sur <strong>Financials</strong></li>
-  <li>3 onglets disponibles : <strong>Income Statement · Balance Sheet · Cash Flow</strong></li>
-  <li>Prends les données sur <strong>3 ans minimum</strong> pour voir les tendances</li>
-  <li>Note : pour Clariane, certaines données peuvent être en milliards — fais attention aux unités</li>
+  <li>Va sur <strong>fr.finance.yahoo.com</strong> → tape le ticker dans la barre de recherche → appuie sur Entrée</li>
+  <li>Dans le menu horizontal sous le nom de l'entreprise, clique sur <strong>Financials</strong></li>
+  <li>Tu vois 3 onglets : <strong>Income Statement</strong> (compte de résultat) · <strong>Balance Sheet</strong> (bilan) · <strong>Cash Flow Statement</strong> (flux de trésorerie)</li>
+  <li>Par défaut les données sont affichées en <strong>annuel</strong> — assure-toi que "Annual" est sélectionné (pas "Quarterly")</li>
+  <li>Yahoo affiche <strong>4 années</strong> côte à côte — prends les <strong>3 dernières</strong></li>
+  <li>Les chiffres sont en milliers (k) ou millions (M) selon les entreprises — <strong>vérifie l'unité indiquée en haut du tableau</strong> avant de recopier</li>
 </ul>
  
-<h4>Ce que tu produis pour chaque entreprise (structure libre)</h4>
-<ul>
-  <li><span class="pill pill-blue">Excel</span> Données brutes sur 3 ans + les 8 ratios calculés + un DCF simplifié</li>
-  <li><span class="pill pill-blue">Mémo</span> Une page maximum — contexte · points forts · vigilances · valorisation · recommandation</li>
-</ul>
+<h4>Tableau Excel à construire — structure identique pour les 3 entreprises</h4>
+<p>Crée un fichier Excel par entreprise avec 3 onglets. Les noms de lignes ci-dessous correspondent exactement aux libellés que tu verras sur Yahoo Finance.</p>
  
-<h4>Points d'attention spécifiques par entreprise</h4>
+<h4>Onglet 1 — Données brutes (à remplir avec les chiffres Yahoo Finance)</h4>
 <table>
-  <tr><th>Entreprise</th><th>Ce sur quoi concentrer ton analyse</th></tr>
-  <tr><td><strong>Vicat</strong></td><td>Confirme que tout va bien, identifie les leviers de croissance. Est-ce que le niveau de capex est soutenable ? Le retour aux actionnaires est-il raisonnable ?</td></tr>
-  <tr><td><strong>Sword Group</strong></td><td>Les chiffres de surface sont bons. Creuse : est-ce que la croissance du CA se traduit en cash ? Le BFR évolue comment ? La marge est-elle stable ou sous pression ?</td></tr>
-  <tr><td><strong>Clariane</strong></td><td>Entreprise en difficulté réelle. Analyse la soutenabilité de la dette (levier > 4x EBITDA). Le plan de refinancement change-t-il la donne ? Si tu étais DAF, quelles seraient tes 3 priorités immédiates ?</td></tr>
+  <tr><th>Ligne à récupérer</th><th>Onglet Yahoo Finance</th><th>Année N-2</th><th>Année N-1</th><th>Année N</th></tr>
+  <tr><td>Total Revenue</td><td>Income Statement</td><td></td><td></td><td></td></tr>
+  <tr><td>Gross Profit</td><td>Income Statement</td><td></td><td></td><td></td></tr>
+  <tr><td>EBITDA</td><td>Income Statement</td><td></td><td></td><td></td></tr>
+  <tr><td>Operating Income (EBIT)</td><td>Income Statement</td><td></td><td></td><td></td></tr>
+  <tr><td>Net Income</td><td>Income Statement</td><td></td><td></td><td></td></tr>
+  <tr><td>Interest Expense</td><td>Income Statement</td><td></td><td></td><td></td></tr>
+  <tr><td>Total Assets</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
+  <tr><td>Total Stockholders Equity</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
+  <tr><td>Total Debt</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
+  <tr><td>Current Assets</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
+  <tr><td>Current Liabilities</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
+  <tr><td>Inventory</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
+  <tr><td>Accounts Receivable</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
+  <tr><td>Accounts Payable</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
+  <tr><td>Cash And Cash Equivalents</td><td>Balance Sheet</td><td></td><td></td><td></td></tr>
+  <tr><td>Free Cash Flow</td><td>Cash Flow Statement</td><td></td><td></td><td></td></tr>
+  <tr><td>Capital Expenditure</td><td>Cash Flow Statement</td><td></td><td></td><td></td></tr>
 </table>
  
-<div class="cas-danger">Clariane est un cas de stress financier réel. Ne te contente pas de calculer les ratios — interprète ce que ça signifie concrètement pour l'entreprise et formule une recommandation de restructuration.</div>
+<h4>Onglet 2 — Les 8 ratios (formules à trouver toi-même, calculer sur les 3 ans)</h4>
+<table>
+  <tr><th>Ratio</th><th>Ce qu'il mesure</th><th>N-2</th><th>N-1</th><th>N</th><th>Tendance</th></tr>
+  <tr><td>Taux de marge brute</td><td>Efficacité commerciale</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Taux de marge EBITDA</td><td>Rentabilité opérationnelle</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Ratio de liquidité générale</td><td>Capacité à payer court terme</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>BFR en jours de CA</td><td>Poids du cycle d'exploitation</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Levier (Dette nette / EBITDA)</td><td>Niveau d'endettement</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>ROE</td><td>Rentabilité des fonds propres</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>ROCE</td><td>Rentabilité du capital employé</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Cash conversion (FCF / EBITDA)</td><td>Qualité des bénéfices</td><td></td><td></td><td></td><td></td></tr>
+</table>
  
-<h4>Critère de validation</h4>
-<p>Ton analyse est au niveau attendu quand tu peux répondre à cette question sans regarder tes notes : <em>"Si tu étais le conseiller DAF de cette entreprise, quelle serait ta priorité absolue pour les 6 prochains mois, et pourquoi ?"</em></p>
-<div class="cas-warn">Envoie tes 3 fichiers Excel + 3 mémos à Claude : "Corrige mon cas pratique Phase 4 — [nom de l'entreprise]" — un par un pour un retour détaillé.</div>
+<h4>Onglet 3 — DCF simplifié (structure libre — même méthode que Phase 3)</h4>
+<ul>
+  <li>FCF de base = Free Cash Flow de l'année N récupéré sur Yahoo Finance</li>
+  <li>Projette sur 5 ans avec le taux de croissance historique du CA comme hypothèse</li>
+  <li>WACC : utilise <strong>8%</strong> pour Vicat et Sword, <strong>10%</strong> pour Clariane (prime de risque supplémentaire)</li>
+  <li>Croissance perpétuelle : <strong>2%</strong> pour les 3</li>
+  <li>Compare ta valeur d'entreprise obtenue à la <strong>capitalisation boursière</strong> visible sur la page principale Yahoo Finance</li>
+</ul>
+ 
+<h4>Questions directrices par entreprise — à répondre dans ton mémo</h4>
+<table>
+  <tr><th>Entreprise</th><th>Questions spécifiques à traiter</th></tr>
+  <tr><td><strong>Vicat</strong></td><td>La rentabilité est-elle stable ou en progression sur 3 ans ? Le Capital Expenditure (capex) représente quel % du CA — est-ce cohérent avec une industrie lourde ? La dette nette est-elle bien couverte par le FCF ? Y a-t-il des signaux que la croissance future pourrait ralentir ?</td></tr>
+  <tr><td><strong>Sword Group</strong></td><td>Le CA croît — est-ce que le FCF croît dans les mêmes proportions ? La marge EBITDA est-elle stable sur 3 ans ou se comprime-t-elle ? Le BFR augmente-t-il plus vite que le CA (signal d'alerte) ? Qu'est-ce que ça dit sur la qualité de la croissance ?</td></tr>
+  <tr><td><strong>Clariane</strong></td><td>Quel est le ratio Dette nette / EBITDA — est-il soutenable ? Les charges financières (Interest Expense) représentent quel % de l'EBIT — l'entreprise peut-elle servir sa dette ? Le FCF est-il positif ou négatif ? Si tu étais DAF, quelles seraient tes 3 priorités immédiates pour stabiliser la situation ?</td></tr>
+</table>
+ 
+<div class="cas-danger">Pour Clariane : les chiffres sont en milliards d'euros. Le levier dépasse 4x l'EBITDA — c'est une situation de stress réelle. Ne te contente pas de constater, formule une recommandation concrète de restructuration financière.</div>
+ 
+<h4>Mémo d'une page — structure attendue (identique pour les 3)</h4>
+<ul>
+  <li><strong>1. Contexte</strong> (3 lignes) — secteur, taille, positionnement</li>
+  <li><strong>2. Points forts</strong> (2–3 bullets avec chiffres)</li>
+  <li><strong>3. Points de vigilance</strong> (2–3 bullets avec chiffres)</li>
+  <li><strong>4. Valorisation</strong> (2 lignes) — DCF vs capitalisation boursière</li>
+  <li><strong>5. Recommandation</strong> (1 phrase) — priorité absolue si tu es le conseiller DAF</li>
+</ul>
+ 
+<div class="cas-warn">Envoie ton Excel + mémo à Claude entreprise par entreprise : "Corrige mon cas pratique Phase 4 — Vicat" puis Sword puis Clariane. Un par un pour un retour détaillé sur chaque.</div>
 </div>`
  
 };
