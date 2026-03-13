@@ -102,7 +102,7 @@ h1{font-size:22px;font-weight:600;margin-bottom:4px}
   <h1>Roadmap — DAF Externe &amp; Conseil Financier</h1>
   <p class="subtitle">
     Formation pré-master · 18 modules · ~200h · 100% gratuit
-    <span class="sync-status sync-ok" id="sync-status">✓ Synchronisé</span>
+    <span class="sync-status sync-ok" id="sync-status">✓ Synchronisé</span><button onclick="forceSync()" id="sync-btn" style="font-size:11px;padding:2px 8px;border-radius:10px;border:0.5px solid #ccc;background:#fff;cursor:pointer;color:#555">⟳ Rafraîchir</button>
   </p>
   <div class="header-stats">
     <div class="stat"><div class="stat-label">Modules validés</div><div class="stat-value" id="s-done">0/18</div><div class="stat-sub">étapes complétées</div></div>
@@ -147,6 +147,20 @@ async function saveToCloud(){
     localStorage.setItem('roadmap_daf_v5',JSON.stringify(state));
     setStatus('ok');
   }catch(e){localStorage.setItem('roadmap_daf_v5',JSON.stringify(state));setStatus('error');}
+}
+async function forceSync(){
+  setStatus('loading');
+  document.getElementById('phases-container').innerHTML='';
+  try{
+    const res=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`,{headers:{'X-Master-Key':API_KEY}});
+    const data=await res.json();
+    state=data.record||{};
+    setStatus('ok');render();updateStats();
+  }catch(e){
+    const local=localStorage.getItem('roadmap_daf_v5');
+    if(local)state=JSON.parse(local);
+    setStatus('error');render();updateStats();
+  }
 }
 function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveToCloud,1000);}
 function setStatus(s){
